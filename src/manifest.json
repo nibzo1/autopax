@@ -1,0 +1,58 @@
+ {
+	"name": "AutoPax",
+	"description": "This extension Populates pax details in a project, NameFirming, Group, IBE, Express and Credit Card. Added todo list. Author: Andrew Howell",
+	"version": "1.0.7.1",  
+
+	"browser_action": {
+		"default_title": "AutoPax",
+		"default_icon": "images/icon.png",
+		"default_popup": "popup.html"
+	},	  
+	"content_security_policy": "script-src 'self' 'unsafe-eval'  https://ajax.googleapis.com; object-src 'self'",  
+	"manifest_version": 2,	
+	"permissions": [
+		"contextMenus",
+		"tabs", 
+		"*://*/*/*/passengerDetails.do?servicing=true", 
+		"*://*/*/*/passengerDetails.do", 
+		"*://*/*/xrezagent/servicing/groupNameFirming.do", 
+		"*://*/*/xrezagent/servicing/groupOwnerDetails.do",
+		"*://*/*/xrezagent/servicing/expressBookingDetails.do",
+		"*://*/jsp/shopper/*"
+	],
+	"icons": { "128": "images/icon.png" },  	
+	"options_page": "options.html",
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"content_scripts": [ 
+		{
+			"matches": ["*://*/*/*/passengerDetails.do?servicing=true","*://*/*/*/passengerDetails.do"],	
+			"js": ["libs/jquery.min.2.0.3.js","autopax/autopaxVariables.js","autopax/contentScripts/ibePax.js"] 
+		},
+		{
+			"matches": ["*://*/*/xrezagent/servicing/groupNameFirming.do"],	
+			"js": ["libs/jquery.min.2.0.3.js","autopax/autopaxVariables.js","autopax/contentScripts/nameFirmingPax.js"]
+		},
+		{
+			"matches": ["*://*/*/xrezagent/servicing/groupOwnerDetails.do"],	
+			"js": ["libs/jquery.min.2.0.3.js","autopax/autopaxVariables.js","autopax/contentScripts/groupPax.js"]
+		},	
+		{
+			"matches": ["*://*/*/xrezagent/servicing/ferryAllocation.do","*://*/*/*/nameAllocation.do"],		
+			"js": ["libs/jquery.min.2.0.3.js","autopax/autopaxVariables.js","autopax/contentScripts/numberPlate.js"]
+		},
+		{
+			"matches": ["*://*/*/*/shoppingCart.do"],
+			"js": ["libs/jquery.min.2.0.3.js","autopax/autopaxVariables.js","autopax/contentScripts/termsAndConditions.js"]
+		},
+		{
+			"matches": ["*://*/*/xrezagent/servicing/expressBookingDetails.do"],	
+			"js": ["libs/jquery.min.2.0.3.js","autopax/autopaxVariables.js","autopax/contentScripts/expressPax.js"]
+		},
+		{
+			"matches": ["*://*/jsp/shopper/*","*://*/*/*/paymentDetails.do"],	
+			"js": ["libs/jquery.min.2.0.3.js","autopax/autopaxVariables.js","autopax/contentScripts/creditCard.js"]
+		}
+	]
+}
