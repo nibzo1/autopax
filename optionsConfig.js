@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	for(var i = 0; i < inputs.length; i++) {
 		inputs[i].addEventListener('click', configHandler);
 	}	
+
+	$('#cardType').on('click', function(){
+
+	});
 });
 
 function configHandler(e) {		
@@ -22,27 +26,9 @@ function configHandler(e) {
 }
 
 function setLocalStore1(val, id){
-	if(id == "grp"){
-		localStorage["grpenabled"] = val;
+	if(id.length){
+		localStorage[id+"enabled"] = val;
 	}
-	else if(id == "ibe"){
-		localStorage["ibeenabled"] = val;
-	}
-	else if(id == "nf"){
-		localStorage["nfenabled"] = val;
-	}	
-	else if(id == "exp"){
-		localStorage["expenabled"] = val;
-	}	
-	else if(id == "crd"){
-		localStorage["crdenabled"] = val;
-	}		
-	else if(id == "nump"){
-		localStorage["numpenabled"] = val;
-	}
-	else if(id == "tac"){
-		localStorage["tacenabled"] = val;
-	}	
 }
 	
 // Restores select box state to saved value from localStorage.
