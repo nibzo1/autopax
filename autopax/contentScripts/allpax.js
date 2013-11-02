@@ -1,22 +1,22 @@
 chrome.extension.sendRequest({method: "getLocalStorage", key: "allpaxenabled"}, function(response) {
 	if(response && response.data == 'true'){
-		doTac(true);
+		doAutopax(true);
 	}
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
 	if(request == "allpaxenabled"){ 			
-		doTac(true);
+		doAutopax(true);
 	} 
 }); 
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
 	if(request == "allpaxdisabled"){ 				
-		doTac(false);
+		doAutopax(false);
 	} 
 }); 
 
-function doTac(status){
+function doAutopax(status){
 	if(status){			
 		$('#continue-btn').live('click', function(){
 			$('.allPax').each(function(){
