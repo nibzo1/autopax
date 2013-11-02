@@ -1,12 +1,14 @@
 //express pax details 
+
+
 chrome.extension.sendRequest({method: "getLocalStorage", key: "expenabled"}, function(response) {
-	if(response && response.data == 'true'){
+	if(response && response.data == 'true'){		
 		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
 	}
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "expenabled"){ 			
+	if(request == "expenabled"){		
 		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
 	} 
 }); 
@@ -18,10 +20,11 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 }); 
 
 function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX){
+	
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
-	 $('select[id$=-Gender]').each(function (idx, ele) {
+	$('select[id$=-Gender]').each(function (idx, ele) {
 		if(firstName===''){
 			ele.selectedIndex = 0;
 		}else{
