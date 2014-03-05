@@ -18,7 +18,7 @@ var crd = chrome.contextMenus.create({
 var nump = chrome.contextMenus.create({
 	"title": "Enable Number Plate", "id" : "nump", "type": "checkbox", "checked" : isChecked("numpenabled"), "onclick":checkboxOnClick
 });
-var nump = chrome.contextMenus.create({
+var profile = chrome.contextMenus.create({
 	"title": "Enable Profile", "id" : "nump", "type": "checkbox", "checked" : isChecked("profileenabled"), "onclick":checkboxOnClick
 });
 var tac = chrome.contextMenus.create({
