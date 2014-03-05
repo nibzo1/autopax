@@ -17,11 +17,24 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 }); 
 
 function doAutopax(status){
+	console.log("int he places statrus = "+status);
+	
 	if(status){			
-		$('#continue-btn').live('click', function(){
-			$('.allPax').each(function(){
-			  $(this).click()
-			});
+		console.log("made it in status");
+		$(document).ready(function(){
+			$('#continue-btn').on('click', function(){
+				console.log("in click handler");
+			allPax();
+				$('.allPax').each(function (){
+					console.log("in .each");
+					
+					
+					$(this).click();
+					$(this).trigger("click");
+				});
+				
+				$('.allPax').each(function(){$(this).click()});
+			});	
 		});	
 	}	
 }
