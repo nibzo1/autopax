@@ -17,6 +17,9 @@
 		"*://*/*/xrezagent/servicing/groupNameFirming.do", 
 		"*://*/*/xrezagent/servicing/groupOwnerDetails.do",
 		"*://*/*/xrezagent/servicing/expressBookingDetails.do",
+		"*://*/*/*/*/addExtras.do",
+		"*://*/*/*/addExtras.do",
+		"*://*/*/*/createProfile.do",
 		"*://*/jsp/shopper/*"
 	],
 	"icons": { "128": "images/icon.png" },  	
@@ -37,7 +40,7 @@
 			] 
 		},
 		{
-			"matches": ["*://*/*/*/extras.do","*://*/*/*/extras.do"],	
+			"matches": ["*://*/*/*/*/addExtras.do","*://*/*/*/addExtras.do"],	
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"autopax/contentScripts/allpax.js"
@@ -88,6 +91,14 @@
 				"libs/jquery.min.2.0.3.js",
 				"autopax/autopaxVariables.js",
 				"autopax/contentScripts/creditCard.js"
+			]
+		},
+		{
+			"matches": ["*://*/*/*/createProfile.do"],
+			"js": [
+				"libs/jquery.min.2.0.3.js",
+				"autopax/autopaxVariables.js", 
+				"autopax/contentScripts/profile.js"
 			]
 		}
 	]
