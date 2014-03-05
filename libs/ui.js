@@ -25,6 +25,12 @@ $(function() {
 	$("#cardNumber").autocomplete({
 		source: availableTags
 	});
+
+	/*$('#cardType').on('change', function(){
+		if(this.){
+
+		}
+	});*/
 		
 	$("#button").button();
 	
