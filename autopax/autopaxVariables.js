@@ -8,6 +8,8 @@ var contactCity = '';
 var billPostcode = '';
 var countryIDX = '';
 var numberPlate = '';
+var emailChecked = '';
+var profileType = '';
 var cardType = '';
 var cardNumber = '';
 var cardName = '';
@@ -15,38 +17,48 @@ var cardMonth = '';
 var cardYear = '';
 var cvv = '';
 
-chrome.extension.sendRequest({method: "getLocalStorage", key: "cardType"}, function(response) {		
+chrome.extension.sendRequest({method: "getLocalStorage", key: "emailChecked"}, function(response) {
+	if(response && response.data != ''){
+		emailChecked = response.data;
+	}
+});
+chrome.extension.sendRequest({method: "getLocalStorage", key: "profileType"}, function(response) {
+	if(response && response.data != ''){
+		profileType = response.data;
+	}
+});
+chrome.extension.sendRequest({method: "getLocalStorage", key: "cardType"}, function(response) {
 	if(response && response.data != ''){
 		cardType = response.data;
 	}
 });
-chrome.extension.sendRequest({method: "getLocalStorage", key: "cardNumber"}, function(response) {		
+chrome.extension.sendRequest({method: "getLocalStorage", key: "cardNumber"}, function(response) {
 	if(response && response.data != ''){
 		cardNumber = response.data;
 	}
 });
-chrome.extension.sendRequest({method: "getLocalStorage", key: "cardName"}, function(response) {		
+chrome.extension.sendRequest({method: "getLocalStorage", key: "cardName"}, function(response) {
 	if(response && response.data != ''){
 		cardName = response.data;
 	}
 });
-chrome.extension.sendRequest({method: "getLocalStorage", key: "cardMonth"}, function(response) {		
+chrome.extension.sendRequest({method: "getLocalStorage", key: "cardMonth"}, function(response) {
 	if(response && response.data != ''){
 		cardMonth = response.data;
 	}
 });
-chrome.extension.sendRequest({method: "getLocalStorage", key: "cvv"}, function(response) {		
+chrome.extension.sendRequest({method: "getLocalStorage", key: "cvv"}, function(response) {
 	if(response && response.data != ''){
 		cvv = response.data;
 	}
 });
-chrome.extension.sendRequest({method: "getLocalStorage", key: "cardYear"}, function(response) {		
+chrome.extension.sendRequest({method: "getLocalStorage", key: "cardYear"}, function(response) {
 	if(response && response.data != ''){
 		cardYear = response.data;
 	}
 });
 
-chrome.extension.sendRequest({method: "getLocalStorage", key: "firstName"}, function(response) {		
+chrome.extension.sendRequest({method: "getLocalStorage", key: "firstName"}, function(response) {
 	if(response && response.data != ''){
 		firstName = response.data;
 	}
@@ -97,7 +109,7 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "numberPlate"}, fu
 	}
 });
 
-if (firstName === '' || surname === '' || email === '' || phone === '' ||  groupName === '' ||  contactAddress1 === '' ||  contactCity === '' ||  billPostcode === '' ||  countryIDX === '' ||  cardType === '' ||   cardNumber === '' ||  cardName === '' ||  cardMonth === '' ||  cardYear === '' ||  cvv === '' ) {
+if (firstName === '' || surname === '' || email === '' || phone === '' ||  groupName === '' ||  contactAddress1 === '' ||  contactCity === '' ||  billPostcode === '' ||  countryIDX === ''||  emailChecked === ''||  profileType === '' ||  cardType === '' ||   cardNumber === '' ||  cardName === '' ||  cardMonth === '' ||  cardYear === '' ||  cvv === '' ) {
 	firstName = 'firstName';
 	surname = 'surName';
 	email = 'a@a.com';
@@ -107,9 +119,11 @@ if (firstName === '' || surname === '' || email === '' || phone === '' ||  group
 	contactCity = 'Galway';
 	billPostcode = '0000';
 	countryIDX = 110;  //ireland
-	
-	cardType = '1';	
-	cardNumber = '5434699878988745';	
+	profileType = 'colorClub';  //ireland
+	emailChecked = true;  //ireland
+
+	cardType = '1';
+	cardNumber = '5434699878988745';
 	cardName = 'test';
 	cardMonth = '10';
 	cardYear = '15';
