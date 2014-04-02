@@ -1,26 +1,26 @@
-//express pax details 
+//express pax details
 
 
 chrome.extension.sendRequest({method: "getLocalStorage", key: "expenabled"}, function(response) {
-	if(response && response.data == 'true'){		
+	if(response && response.data == 'true'){
 		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "expenabled"){		
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "expenabled"){
 		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
-	} 
-}); 
+	}
+});
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "expdisabled"){ 				
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "expdisabled"){
 		doPax("","","","","","","","");
-	} 
-}); 
+	}
+});
 
 function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX){
-	
+
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
@@ -46,17 +46,17 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 			ele.value = surname;
 		}else{
 			ele.value = surname + suffix(idx);
-		}		
+		}
 		ele.blur()
 	});
-	$('select[id$=-Age]').each(function (idx, ele) {		
+	$('select[id$=-Age]').each(function (idx, ele) {
 		if(firstName===''){
 			ele.selectedIndex = 0;
 		}else{
 			ele.selectedIndex = 2;
 		}
 	});
-	$('#Passenger1-Email').each(function (idx, ele) {		
+	$('#Passenger1-Email').each(function (idx, ele) {
 		ele.value = email;
 	});
 	$('#Passenger1-PhoneNumber').each(function (idx, ele) {
@@ -72,7 +72,7 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 		ele.value = billPostcode
 	});
 	$('input[id$=-Nationality]').each(function (idx, ele) {
-		ele.focus();		
+		ele.focus();
 		if(firstName===''){
 			ele.selectedIndex = 0;
 		}else{
@@ -81,4 +81,3 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 		ele.blur()
 	});
 }
-	
