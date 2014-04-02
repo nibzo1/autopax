@@ -5,17 +5,17 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "crdenabled"}, fun
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "grpenabled"){ 		
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "grpenabled"){
 		doCard(cardNumber,cardName,cardMonth,cardYear,cvv,cardType);
-	} 
-}); 
+	}
+});
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "grpdisabled"){ 				
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "grpdisabled"){
 		doPax("","","","","","");
-	} 
-}); 
+	}
+});
 
 function doCard(cardNumber,cardName,cardMonth,cardYear,cvv,cardType){
 	var suffix = function (idx) {
@@ -23,7 +23,7 @@ function doCard(cardNumber,cardName,cardMonth,cardYear,cvv,cardType){
 	};
 	if($('[name="CVC"]').length || $('[name="cardNumber"]').length || $('[name="cardHolderName"]').length || $('[name="expiryMonth"]').length || $('[name="expiryYear"]').length){
 		$('[name="cardNumber"]').val(cardNumber);
-		$('[name="cardHolderName"]').val(cardName);	
+		$('[name="cardHolderName"]').val(cardName);
 		$('[name="expiryMonth"]').prop('selectedIndex', cardMonth);
 		$('[name="expiryYear"]').prop('selectedIndex', cardYear);
 		$('[name="CVC"]').val(cvv);
@@ -32,11 +32,25 @@ function doCard(cardNumber,cardName,cardMonth,cardYear,cvv,cardType){
 		$('[name="paymentTypes"]').children("option").each(function(){
 			$(this).removeAttr("selected");
 		});
-		
+
 		$('[name="paymentTypes"]').children("option").each(function(){
 			if($(this).val() == cardType){
 				$(this).prop('selected', 'true');
-			}		
-		});		
-	}	
+			}
+		});
+	}
+
+	//profile payment screen
+	if($('.radio-container').length){
+		$('.radio-container').children().children("input").each(function(){
+			$(this).prop("checked",false);
+			$(this).removeAttr("checked");
+		});
+		$('.radio-container').children().children("input").each(function(){
+			if($(this).val() == cardType){
+				$(this).prop("checked",true);
+				$(this).attr('checked', 'checked');
+			}
+		});
+	}
 }
