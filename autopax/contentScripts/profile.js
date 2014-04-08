@@ -39,9 +39,10 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 	$('[name="Profile/Customer/Email"]').val(email);
 
 	if(emailChecked){
-		$('[name="Profile/TPA_Extensions/EmailPromotion/@enabled"]').prop('checked','true');
+		$('#emailCheckbox').prop('checked', true);
+		$('#emailCheckbox').attr('checked','checked');
+		$('#emailCheckbox-hidden').prop('disabled', true);
 	}
-
 	$('[name="confirmEmail"]').val(email);
 
 	$('#checkout.contactDetails.countryList').each(function (idx, ele) {
@@ -55,7 +56,8 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 
 	$('#MemberLevelSelection').each(function (idx, ele) {
 		if($(this).val()===profileType){
-			$(this).prop("checked", "true")
+			$(this).prop("checked", true);
+			$(this).prop("checked", 'checked')
 		}else{
 			$(this).removeAttr("checked");
 		}
