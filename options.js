@@ -26,10 +26,10 @@ function save_options_pax() {
     var billPostcode = $("#billPostcode").val();
     var countryIDX = $("#countryIDX").prop('selectedIndex');
     var emailChecked = $('#newsletter').prop('checked');
-    var countryIDX = $("#countryIDX").prop('selectedIndex');
+    var nationalityIDX = $("#nationalityIDX").prop('selectedIndex');
     var profileType = $("#profileType").val();
 
-    if(validate_pax_options(firstName,surname,email,phone,groupName,contactAddress1,contactCity,numberPlate,billPostcode,countryIDX,profileType)){
+    if(validate_pax_options(firstName,surname,email,phone,groupName,contactAddress1,contactCity,numberPlate,billPostcode,countryIDX,profileType,nationalityIDX)){
 		localStorage["firstName"] = firstName;
 		localStorage["surname"] = surname;
 		localStorage["email"] = email;
@@ -40,6 +40,7 @@ function save_options_pax() {
 		localStorage["numberPlate"] = numberPlate;
 		localStorage["billPostcode"] = billPostcode;
 		localStorage["countryIDX"] = countryIDX;
+		localStorage["nationalityIDX"] = nationalityIDX;
 		localStorage["emailChecked"] = emailChecked;
 		localStorage["profileType"] = profileType;
 		setStatus("Options Saved.","pax");
@@ -83,7 +84,7 @@ function addError(err,type){
 	}, 5000);
 }
 
-function validate_pax_options(firstName,surname,email,phone,groupName,contactAddress1,contactCity,numberPlate,billPostcode,countryIDX,profileType) {
+function validate_pax_options(firstName,surname,email,phone,groupName,contactAddress1,contactCity,numberPlate,billPostcode,countryIDX,profileType,nationalityIDX) {
 	var validation = true;
 	var type = 'pax';
 
@@ -129,6 +130,10 @@ function validate_pax_options(firstName,surname,email,phone,groupName,contactAdd
 	}
 	if(isNaN(countryIDX) || countryIDX===0 || countryIDX===5){
 		addError('Country must be selected',type);
+		validation = false;
+	}
+	if(isNaN(nationalityIDX) || nationalityIDX===0 || nationalityIDX===5){
+		addError('Nationality must be selected',type);
 		validation = false;
 	}
 	return validation;
@@ -178,6 +183,7 @@ function restore_options() {
 	var numberPlate = localStorage["numberPlate"];
 	var billPostcode = localStorage["billPostcode"];
 	var countryIDX = localStorage["countryIDX"];
+	var nationalityIDX = localStorage["nationalityIDX"];
 	var emailChecked = localStorage["emailChecked"];
 	var profileType = localStorage["profileType"];
 
@@ -190,7 +196,7 @@ function restore_options() {
 	var cvv = localStorage["cvv"];
 
 	//check for null
-	if(!firstName || !surname || !email || !phone || !groupName || !contactAddress1 || !contactCity || !numberPlate || !billPostcode || !countryIDX || !emailChecked|| !profileType) {
+	if(!firstName || !surname || !email || !phone || !groupName || !contactAddress1 || !contactCity || !numberPlate || !billPostcode || !countryIDX || !nationalityIDX || !emailChecked|| !profileType) {
 		return;
 	}
 
@@ -207,6 +213,7 @@ function restore_options() {
     $("#newsletter").prop("checked", emailChecked);
     $("#profileType").val(profileType);
 	setSelectIdx(countryIDX,'countryIDX');
+	setSelectIdx(nationalityIDX,'nationalityIDX');
 
 	if(!cardType  || !cardNumber  || !cardName  || !cardMonth  || !cardYear  || !cvv) {
 		return;
