@@ -1,26 +1,29 @@
 //profile pax details
 chrome.extension.sendRequest({method: "getLocalStorage", key: "profileenabled"}, function(response) {
 	if(response && response.data == 'true'){
-		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX, emailChecked, profileType);
+		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX, emailChecked, profileType,nationalityIDX);
 	}
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request == "profileenabled"){
-		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX, emailChecked, profileType);
+		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX, emailChecked, profileType,nationalityIDX);
 	}
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request == "profiledisabled"){
-		doPax("","","","","","","","","","");
+		doPax("","","","","","","","","","","");
 	}
 });
 
-function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX,emailChecked,profileType){
+function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX,emailChecked,profileType,nationalityIDX){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
+
+
+	console.log('nationalityIDX = '+nationalityIDX);
 
 	$('[name="Profile/Customer/PersonName/GivenName"]').val(firstName);
 	$('[name="Profile/Customer/PersonName/Surname"]').val(surname);
@@ -33,6 +36,7 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 	$('[id$="BirthDate_year"]').prop('selectedIndex', 40);
 	$('[id$="BirthDate"]').val('1974-12-05');
 	$('[name="Profile/Customer/Address/CountryName/@Code"]').prop('selectedIndex', countryIDX);
+	$('[name="Profile/Customer/@Nationality"]').prop('selectedIndex', nationalityIDX);
 	$('[name="Profile/Customer/Address/AddressLine$1$"]').val(contactAddress1);
 	$('[name="Profile/Customer/Address/CityName"]').val(contactCity);
 	$('[name="Profile/Customer/Address/PostalCode"]').val(billPostcode);

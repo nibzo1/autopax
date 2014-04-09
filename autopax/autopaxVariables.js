@@ -7,6 +7,7 @@ var contactAddress1 = '';
 var contactCity = '';
 var billPostcode = '';
 var countryIDX = '';
+var nationalityIDX = '';
 var numberPlate = '';
 var emailChecked = '';
 var profileType = '';
@@ -103,13 +104,18 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "countryIDX"}, fun
 		countryIDX = response.data;
 	}
 });
+chrome.extension.sendRequest({method: "getLocalStorage", key: "nationalityIDX"}, function(response) {
+	if(response.data != ''){
+		nationalityIDX = response.data;
+	}
+});
 chrome.extension.sendRequest({method: "getLocalStorage", key: "numberPlate"}, function(response) {
 	if(response.data != ''){
 		numberPlate = response.data;
 	}
 });
 
-if (firstName === '' || surname === '' || email === '' || phone === '' ||  groupName === '' ||  contactAddress1 === '' ||  contactCity === '' ||  billPostcode === '' ||  countryIDX === ''||  emailChecked === ''||  profileType === '' ||  cardType === '' ||   cardNumber === '' ||  cardName === '' ||  cardMonth === '' ||  cardYear === '' ||  cvv === '' ) {
+if (firstName === '' || surname === '' || email === '' || phone === '' ||  groupName === '' ||  contactAddress1 === '' ||  contactCity === '' ||  billPostcode === '' ||  countryIDX === ''||   nationalityIDX === '' ||  emailChecked === ''||  profileType === '' ||  cardType === '' ||   cardNumber === '' ||  cardName === '' ||  cardMonth === '' ||  cardYear === '' ||  cvv === '' ) {
 	firstName = 'firstName';
 	surname = 'surName';
 	email = 'a@a.com';
@@ -119,8 +125,9 @@ if (firstName === '' || surname === '' || email === '' || phone === '' ||  group
 	contactCity = 'Galway';
 	billPostcode = '0000';
 	countryIDX = 110;  //ireland
-	profileType = 'colorClub';  //ireland
-	emailChecked = true;  //ireland
+	nationalityIDX = 110;  //ireland
+	profileType = 'colorClub';
+	emailChecked = true;
 
 	cardType = '1';
 	cardNumber = '5434699878988745';
