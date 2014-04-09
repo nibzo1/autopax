@@ -25,58 +25,78 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 		return String.fromCharCode(idx + 65);
 	};
 	$('select[id$=-Gender]').each(function (idx, ele) {
-		if(firstName===''){
-			ele.selectedIndex = 0;
-		}else{
-			ele.selectedIndex = 1;
+		if($(ele).val() === ''){
+			if(firstName===''){
+				ele.selectedIndex = 0;
+			}else{
+				ele.selectedIndex = 1;
+			}
 		}
 	});
 	$('input[id$=-GivenName]').each(function (idx, ele) {
 		ele.focus();
-		if(firstName===''){
-			ele.value = firstName;
-		}else{
-			ele.value = firstName + suffix(idx);
+		if($(ele).val() === ''){
+			if(firstName===''){
+				ele.value = firstName;
+			}else{
+				ele.value = firstName + suffix(idx);
+			}
 		}
 		ele.blur()
 	});
 	$('input[id$=-Surname]').each(function (idx, ele) {
 		ele.focus();
-		if(surname===''){
-			ele.value = surname;
-		}else{
-			ele.value = surname + suffix(idx);
+		if($(ele).val() === ''){
+			if(surname===''){
+				ele.value = surname;
+			}else{
+				ele.value = surname + suffix(idx);
+			}
 		}
 		ele.blur()
 	});
 	$('select[id$=-Age]').each(function (idx, ele) {
-		if(firstName===''){
-			ele.selectedIndex = 0;
-		}else{
-			ele.selectedIndex = 2;
+		if($(ele).val() === ''){
+			if(firstName===''){
+				ele.selectedIndex = 0;
+			}else{
+				ele.selectedIndex = 2;
+			}
 		}
 	});
 	$('#Passenger1-Email').each(function (idx, ele) {
-		ele.value = email;
+		if($(ele).val() === ''){
+			ele.value = email;
+		}
 	});
 	$('#Passenger1-PhoneNumber').each(function (idx, ele) {
-		ele.value = phone;
+		if($(ele).val() === ''){
+			ele.value = phone;
+		}
 	});
 	$('#Passenger1-AddressLine1').each(function (idx, ele) {
-		ele.value = contactAddress1;
+		if($(ele).val() === ''){
+			ele.value = contactAddress1;
+		}
 	});
 	$('#Passenger1-CityName').each(function (idx, ele) {
-		ele.value = contactCity;
+		if($(ele).val() === ''){
+			ele.value = contactCity;
+		}
 	});
 	$('#Passenger1-PostalCode').each(function (idx, ele) {
-		ele.value = billPostcode
+		if($(ele).val() === ''){
+			ele.value = billPostcode;
+		}
 	});
 	$('input[id$=-Nationality]').each(function (idx, ele) {
 		ele.focus();
-		if(firstName===''){
-			ele.selectedIndex = 0;
-		}else{
-			ele.selectedIndex = countryIDX;
+		if($(ele).val() === ''){
+			if(firstName===''){
+				ele.selectedIndex = 0;
+			}else{
+				ele.selectedIndex = countryIDX;
+			}
 		}
 		ele.blur()
 	});
