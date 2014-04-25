@@ -22,9 +22,6 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 		return String.fromCharCode(idx + 65);
 	};
 
-
-	console.log('nationalityIDX = '+nationalityIDX);
-
 	$('[name="Profile/Customer/PersonName/GivenName"]').val(firstName);
 	$('[name="Profile/Customer/PersonName/Surname"]').val(surname);
 	$('[name="Profile/Customer/Telephone$1$/@AreaCityCode"]').val(087);
@@ -51,7 +48,6 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 
 	$('#checkout.contactDetails.countryList').each(function (idx, ele) {
 		ele.selectedIndex = countryIDX;
-		ele.change();
 	});
 
 	$('#checkout.contactDetails.merchantCountryList').each(function (idx, ele) {
@@ -67,3 +63,11 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 		}
 	});
 }
+
+//inject function to trigger a change event on countryList to enable defaulting of merchant country ect..
+var s = document.createElement('script');
+s.textContent = "ns(document).ready(function() {merchantCountryHandler(ns('#checkout.contactDetails.countryList')); })";
+s.onload = function() {
+    this.parentNode.removeChild(this);
+};
+document.head.appendChild(s);
