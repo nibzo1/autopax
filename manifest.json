@@ -26,79 +26,79 @@
 	"options_page": "options.html",
 	"background": {
 		"scripts": [
-			"background.js",
-			"autopax/contextMenus.js"
+			"app/background.js",
+			"app/contextMenus.js"
 		]
 	},
 	"content_scripts": [
 		{
-			"matches": ["*://*/*/*/passengerDetails.do?servicing=true","*://*/*/*/passengerDetails.do"],
+			"matches": ["*://*/*/*/passengerDetails.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/autopaxVariables.js",
-				"autopax/contentScripts/ibePax.js"
+				"app/variables.js",
+				"app/contentScripts/ibePax.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/*/addExtras.do","*://*/*/*/addExtras.do"],
+			"matches": ["*://*/*/*/*/addExtras.do", "*://*/*/*/addExtras.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/contentScripts/allpax.js"
+				"app/contentScripts/allpax.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/servicing/groupNameFirming.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/autopaxVariables.js",
-				"autopax/contentScripts/nameFirmingPax.js"
+				"app/variables.js",
+				"app/contentScripts/nameFirmingPax.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/servicing/groupOwnerDetails.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/autopaxVariables.js",
-				"autopax/contentScripts/groupPax.js"
+				"app/variables.js",
+				"app/contentScripts/groupPax.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/ferryAllocation.do","*://*/*/*/nameAllocation.do"],
+			"matches": ["*://*/*/*/servicing/ferryAllocation.do", "*://*/*/*/nameAllocation.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/autopaxVariables.js",
-				"autopax/contentScripts/numberPlate.js"
+				"app/variables.js",
+				"app/contentScripts/numberPlate.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/shoppingCart.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/contentScripts/termsAndConditions.js"
+				"app/contentScripts/termsAndConditions.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/servicing/expressBookingDetails.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/autopaxVariables.js",
-				"autopax/contentScripts/expressPax.js"
+				"app/variables.js",
+				"app/contentScripts/expressPax.js"
 			]
 		},
 		{
-			"matches": ["*://*/jsp/shopper/*","*://*/*/*/paymentDetails.do*"],
+			"matches": ["*://*/jsp/shopper/*", "*://*/*/*/paymentDetails.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/autopaxVariables.js",
-				"autopax/contentScripts/creditCard.js"
+				"app/variables.js",
+				"app/contentScripts/creditCard.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/createProfile.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"autopax/autopaxVariables.js",
-				"autopax/contentScripts/profile.js"
+				"app/variables.js",
+				"app/contentScripts/profile.js"
 			]
 		}
 	]
