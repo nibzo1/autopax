@@ -26,19 +26,32 @@ function doPax(firstName,surname,email,countryIDX){
 	var Adult = 0;
 	var Sen = 0;
 	var Child = 0;
+
 	$('div.side-box-section-text').each(function (idx, ele) {
 		var ad = new RegExp("Adults");
 		var se = new RegExp("Discount");
 		var ch = new RegExp("Children");
 		if (ad.exec(ele.innerHTML)) {
-			if (ele.innerHTML[1] == ' ') Adult = parseInt(ele.innerHTML[0]);
-			else Adult = parseInt(ele.innerHTML[0] + ele.innerHTML[1]);
+			if (ele.innerHTML[1] == ' ') {
+				Adult = parseInt(ele.innerHTML[0]);
+			}
+			else {
+				Adult = parseInt(ele.innerHTML[0] + ele.innerHTML[1]);
+			}
 		} else if (se.exec(ele.innerHTML)) {
-			if (ele.innerHTML[1] == ' ') Sen = parseInt(ele.innerHTML[0]);
-			else Sen = parseInt(ele.innerHTML[0] + ele.innerHTML[1]);
+			if (ele.innerHTML[1] == ' ') {
+				Sen = parseInt(ele.innerHTML[0]);
+			}
+			else {
+				Sen = parseInt(ele.innerHTML[0] + ele.innerHTML[1]);
+			}
 		} else if (ch.exec(ele.innerHTML)) {
-			if (ele.innerHTML[1] == ' ') Child = parseInt(ele.innerHTML[0]);
-			else Child = parseInt(ele.innerHTML[0] + ele.innerHTML[1]);
+			if (ele.innerHTML[1] == ' ') {
+				Child = parseInt(ele.innerHTML[0]);
+			}
+			else {
+				Child = parseInt(ele.innerHTML[0] + ele.innerHTML[1]);
+			}
 		}
 	});
 	$('#leadPassenger').each(function (idx, ele) {
@@ -65,8 +78,10 @@ function doPax(firstName,surname,email,countryIDX){
 			}
 		}
 	});
+
 	var fc = 0;
 	var sc = 0;
+
 	$('input.nameFirming').each(function (idx, ele) {
 
 		var ssurname = new RegExp("surname");
@@ -85,17 +100,21 @@ function doPax(firstName,surname,email,countryIDX){
 			}
 		}
 	});
+
 	var Aa = Adult;
 	var Ss = Sen;
+
 	$('select.nameFirming').each(function (idx, ele) {
 		var pax = new RegExp("paxCode");
 		if (pax.exec(ele.id)) {
 			if (Aa > 0) {
 				Aa--;
-			} else if (Ss > 0) {
+			} 
+			else if (Ss > 0) {
 				ele.selectedIndex = 1;
 				Ss--;
-			} else {
+			}
+			else {
 				ele.selectedIndex = 2;
 			}
 		}
@@ -110,13 +129,16 @@ function doPax(firstName,surname,email,countryIDX){
 			else if (Adult > 0) {
 				ele.value = 25;
 				Adult--;
-			} else if (Sen > 0) {
+			} 
+			else if (Sen > 0) {
 				ele.value = 16;
 				Sen--;
-			} else if (Child > 0) {
+			} 
+			else if (Child > 0) {
 				ele.value = 5;
 				Child--;
-			} else {
+			} 
+			else {
 				ele.value = 1;
 			}
 		}
@@ -124,13 +146,13 @@ function doPax(firstName,surname,email,countryIDX){
 	$('select.nameFirming').each(function (idx, ele) {
 		var n = new RegExp("nationality");
 		if (n.exec(ele.id)) {
-			ele.selectedIndex = countryIDX
+			ele.selectedIndex = countryIDX;
 		}
 	});
 	$('select.nameFirming').each(function (idx, ele) {
 		var g = new RegExp("gender");
 		if (g.exec(ele.id)) {
-			ele.selectedIndex = 1
+			ele.selectedIndex = 1;
 		}
 	});
 	$('#nameFirmingCopy').click();
