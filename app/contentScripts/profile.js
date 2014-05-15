@@ -40,17 +40,22 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 	$('[name="Profile/Customer/Email"]').val(email);
 
 	if(emailChecked){
+		$('#emailCheckbox').focus();
 		$('#emailCheckbox').prop('checked', true);
+		$('#emailCheckbox').focus();
 		$('#emailCheckbox').attr('checked','checked');
+		$('#emailCheckbox-hidden').focus();
 		$('#emailCheckbox-hidden').prop('disabled', true);
 	}
 	$('[name="confirmEmail"]').val(email);
 
 	$('#checkout.contactDetails.countryList').each(function (idx, ele) {
+		ele.focus();
 		ele.selectedIndex = countryIDX;
 	});
 
 	$('#checkout.contactDetails.merchantCountryList').each(function (idx, ele) {
+		ele.focus();
 		ele.selectedIndex = countryIDX;
 	});
 

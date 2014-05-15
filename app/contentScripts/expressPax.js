@@ -1,6 +1,4 @@
 //express pax details
-
-
 chrome.extension.sendRequest({method: "getLocalStorage", key: "expenabled"}, function(response) {
 	if(response && response.data == 'true'){
 		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);

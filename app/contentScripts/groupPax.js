@@ -5,17 +5,17 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "grpenabled"}, fun
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "grpenabled"){ 		
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "grpenabled"){
 		doPax(groupName,firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
-	} 
-}); 
+	}
+});
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "grpdisabled"){ 				
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "grpdisabled"){
 		doPax("","","","","","","","","");
-	} 
-}); 
+	}
+});
 
 function doPax(groupName,firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX){
 	var suffix = function (idx) {

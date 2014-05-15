@@ -4,20 +4,20 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "tacenabled"}, fun
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "tacenabled"){ 			
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "tacenabled"){
 		doTac(true);
-	} 
-}); 
+	}
+});
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "tacdisabled"){ 				
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "tacdisabled"){
 		doTac(false);
-	} 
-}); 
+	}
+});
 
 function doTac(status){
-	if(status){			
+	if(status){
 		$('input[type="checkbox"]').prop("checked", "true");
 		$('#ferry-information-agree').val("true");
 	}
