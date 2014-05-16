@@ -25,7 +25,7 @@ function setLocalStoreConfig(val, id){
 	}
 }
 
-// Restores select box state to saved value from localStorage.
+// Restores checkbox state to saved value from localStorage.
 function restore_config_options() {
 	$('input[type="checkbox"][rel="config"]').each(function(){
 		var e = $(this);
