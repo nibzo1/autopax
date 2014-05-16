@@ -109,7 +109,7 @@ body {
 #todo-list li.editing .edit {
 	display: block;
 	/* width: 444px; */
-	padding: 13px 15px 14px 20px; 
+	padding: 13px 15px 14px 20px;
 	/* padding: 13px 15px 14px 80px; */
 	margin: 0;
 }
@@ -192,7 +192,7 @@ body {
 	margin: 10px auto;
 	color: #777777;
 	text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
-	text-align: left;	
+	text-align: left;
 }
 
 #instructions a {

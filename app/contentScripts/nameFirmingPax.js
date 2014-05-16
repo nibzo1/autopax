@@ -5,17 +5,17 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "nfenabled"}, func
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "nfenabled"){ 		
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "nfenabled"){
 		doPax(firstName,surname,email,countryIDX);
-	} 
-}); 
+	}
+});
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){ 
-	if(request == "nfdisabled"){ 				
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request == "nfdisabled"){
 		doPax("","","","");
-	} 
-}); 
+	}
+});
 
 function doPax(firstName,surname,email,countryIDX){
 	var fc = 0;
@@ -66,7 +66,7 @@ function doPax(firstName,surname,email,countryIDX){
 		var givenName = new RegExp("givenName");
 		if (givenName.exec(ele.id)) {
 			if(firstName===''){
-				ele.value = firstName;			
+				ele.value = firstName;
 			}
 			else if (sc == 25) {
 				ele.value = firstName + String.fromCharCode(fc + 65) + String.fromCharCode(sc + 65);
@@ -86,9 +86,9 @@ function doPax(firstName,surname,email,countryIDX){
 
 		var ssurname = new RegExp("surname");
 		if (ssurname.exec(ele.id)) {
-			
+
 			if(surname===''){
-				ele.value = surname;			
+				ele.value = surname;
 			}
 			else if (sc == 25) {
 				ele.value = surname + String.fromCharCode(fc + 65) + String.fromCharCode(sc + 65);
@@ -109,7 +109,7 @@ function doPax(firstName,surname,email,countryIDX){
 		if (pax.exec(ele.id)) {
 			if (Aa > 0) {
 				Aa--;
-			} 
+			}
 			else if (Ss > 0) {
 				ele.selectedIndex = 1;
 				Ss--;
@@ -122,22 +122,22 @@ function doPax(firstName,surname,email,countryIDX){
 	$('input.nameFirming').each(function (idx, ele) {
 		var age = new RegExp("age");
 		if (age.exec(ele.id)) {
-			
+
 			if(firstName===''){
 				ele.value = '';
 			}
 			else if (Adult > 0) {
 				ele.value = 25;
 				Adult--;
-			} 
+			}
 			else if (Sen > 0) {
 				ele.value = 16;
 				Sen--;
-			} 
+			}
 			else if (Child > 0) {
 				ele.value = 5;
 				Child--;
-			} 
+			}
 			else {
 				ele.value = 1;
 			}

@@ -9,17 +9,17 @@ status("tacenabled");
 status("allpaxenabled");
 
 //listen for request from script
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {	
-	if (request.method == "getLocalStorage"){		
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+	if (request.method == "getLocalStorage"){
 		sendResponse({data: localStorage[request.key]});
-	}	
+	}
     else{
-		sendResponse({}); 
+		sendResponse({});
 	}
 });
 
 //application controll functions
-function checkboxOnClick(info, tab) {  
+function checkboxOnClick(info, tab) {
 	var id = info.menuItemId;
 	if(info.checked == true){
 		setLocalStore("true", id);
@@ -31,38 +31,38 @@ function checkboxOnClick(info, tab) {
 	}
 }
 
-function doPaxClickEvt(typ,id) {  	
-	chrome.tabs.getSelected(null, function (tab){ 	
-		if(id.length){			
+function doPaxClickEvt(typ,id) {
+	chrome.tabs.getSelected(null, function (tab){
+		if(id.length){
 			chrome.tabs.sendRequest(tab.id, id+typ);
-		}			
-	}); 
+		}
+	});
 }
 
-function isChecked(typ) {  	
-	if(localStorage[typ] == "true"){ 
-		return true; 
+function isChecked(typ) {
+	if(localStorage[typ] == "true"){
+		return true;
 	}
 	else{
 		return false;
 	}
 }
 
-function openConfig() {  	
+function openConfig() {
 	chrome.tabs.create({
 		url: "options.html"
 	});
 }
 
 function setLocalStore(val, id){
-	if(id.length){		
+	if(id.length){
 		localStorage[id+"enabled"] = val;
 	}
 }
 
-function status(typ) {  
-	var local = localStorage[typ];	
+function status(typ) {
+	var local = localStorage[typ];
 	if(local == 'undifined'){
-		localStorage[typ] = "false";		
+		localStorage[typ] = "false";
 	}
 }
