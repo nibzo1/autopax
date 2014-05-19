@@ -5,12 +5,12 @@ body{
 	margin-top: 2em;
 }
 #tabs {
-	height: 98%;	
+	height: 98%;
 }
-/* 
+/*
 	get the size to allow the full dashboard to be displayed
 	.dash {
-	height: 100%;	
+	height: 100%;
 } */
 #dialog-link {
 	padding: .4em 1em .4em 20px;
@@ -39,14 +39,14 @@ body{
 #icons span.ui-icon {
 	float: left;
 	margin: 0 4px;
-}		
+}
 .fakewindowcontain .ui-widget-overlay {
 	position: absolute;
 }
 
 .label-padding label{
 	width: 100px;
-	
+
 }
 
 .label-position{

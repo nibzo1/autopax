@@ -1,53 +1,45 @@
 // Saves options to localStorage.
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function(){
 	restore_config_options();
 
-	if($('#configer').length){
-		document.querySelector('#configer').addEventListener('click', openConfiger);
-	}
-
-	var inputs = $('input[type="checkbox"][rel="config"]');
-	for(var i = 0; i < inputs.length; i++) {
-		inputs[i].addEventListener('click', configHandler);
-	}
-
-	$('#cardType').on('click', function(){
-
+	$('#configer').on('click', function(){
+		openConfiger();
+	});
+	$('input[type="checkbox"][rel="config"]').on('click', function(){
+		configHandler($(this));
 	});
 });
 
 function configHandler(e) {
-	if($(this).prop("checked")){
-		setLocalStore1("true", $(this).attr('id'));
+	if(e.prop('checked')){
+		setLocalStoreConfig('true', e.attr('id'));
 	}
 	else{
-		setLocalStore1("false", $(this).attr('id'));
+		setLocalStoreConfig('false', e.attr('id'));
 	}
 }
 
-function setLocalStore1(val, id){
+function setLocalStoreConfig(val, id){
 	if(id.length){
-		localStorage[id+"enabled"] = val;
+		localStorage[id+'enabled'] = val;
 	}
 }
 
-// Restores select box state to saved value from localStorage.
+// Restores checkbox state to saved value from localStorage.
 function restore_config_options() {
-
-	//restore config options
-	var inputs = $('input[type="checkbox"][rel="config"]');
-	for(var i = 0; i < inputs.length; i++) {
-		if(isChecked($(inputs[i]).attr('id')+"enabled")){
-			$(inputs[i]).prop("checked", "true");
+	$('input[type="checkbox"][rel="config"]').each(function(){
+		var e = $(this);
+		if(isChecked(e.attr('id')+'enabled')){
+			e.prop('checked', 'true');
 		}
 		else{
-			$(inputs[i]).removeAttr('checked');
+			e.removeAttr('checked');
 		}
-	}
+	});
 }
 
 function isChecked(typ) {
-	if(localStorage[typ] == "true"){
+	if(localStorage[typ] == 'true'){
 		return true;
 	}
 	else{
@@ -57,6 +49,6 @@ function isChecked(typ) {
 
 function openConfiger() {
 	chrome.tabs.create({
-		url: "options.html"
+		url: 'options.html'
 	});
 }
