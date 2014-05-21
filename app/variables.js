@@ -114,25 +114,3 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "numberPlate"}, fu
 		numberPlate = response.data;
 	}
 });
-
-if (firstName === '' || surname === '' || email === '' || phone === '' ||  groupName === '' ||  contactAddress1 === '' ||  contactCity === '' ||  billPostcode === '' ||  countryIDX === ''||   nationalityIDX === '' ||  emailChecked === ''||  profileType === '' ||  cardType === '' ||   cardNumber === '' ||  cardName === '' ||  cardMonth === '' ||  cardYear === '' ||  cvv === '' ) {
-	firstName = 'firstName';
-	surname = 'surName';
-	email = 'a@a.com';
-	phone = '123456789';
-	groupName = 'Group';
-	contactAddress1 = 'Galway';
-	contactCity = 'Galway';
-	billPostcode = '0000';
-	countryIDX = 110;  //ireland
-	nationalityIDX = 110;  //ireland
-	profileType = 'colorClub';
-	emailChecked = true;
-
-	cardType = '1';
-	cardNumber = '5434699878988745';
-	cardName = 'test';
-	cardMonth = '10';
-	cardYear = '15';
-	cvv = '123';
-}
