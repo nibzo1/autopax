@@ -75,13 +75,18 @@ function addError(err,type){
 	var div = $('#error-'+type);
 	div.html(div.html() + '<li>'+err+'</li>');
 	setTimeout(function() {
-		div.html('');
+	   clearErrors(type);
 	}, 5000);
+}
+
+function clearErrors(type){
+	$('#error-'+type).html('');
 }
 
 function validate_pax_options(firstName,surname,email,phone,groupName,contactAddress1,contactCity,numberPlate,billPostcode,countryIDX,profileType,nationalityIDX) {
 	var validation = true;
 	var type = 'pax';
+	clearErrors(type);
 
 	if(firstName === '' ){
 		addError('First name cannot be empty',type);
@@ -137,6 +142,9 @@ function validate_pax_options(firstName,surname,email,phone,groupName,contactAdd
 function validate_card_options(cardType,cardNumber,cardName,cardMonth,cardYear,cvv) {
 	var validation = true;
 	var type = 'card';
+	clearErrors(type);
+
+	console.log(cardMonth)
 
 	if(cardType === '' || cardType==='undefined'){
 		addError('Card type must be selected',type);
@@ -150,11 +158,11 @@ function validate_card_options(cardType,cardNumber,cardName,cardMonth,cardYear,c
 		addError('Credit Card Name cannot be empty',type);
 		validation = false;
 	}
-	if(cardMonth === '' || cardMonth==='undefined'){
+	if(isNaN(cardMonth) || cardMonth===0 || cardMonth === '' || cardMonth==='undefined' || cardMonth==='*'){
 		addError('Credit Month cannot be empty',type);
 		validation = false;
 	}
-	if(cardYear === '' || cardYear==='undefined'){
+	if(isNaN(cardYear) || cardYear===0 || cardYear === '' || cardYear==='undefined' || cardYear==='*'){
 		addError('Credit Year cannot be empty',type);
 		validation = false;
 	}
@@ -214,12 +222,12 @@ function restore_options() {
 		return;
 	}
 	//restore card
-    $('#cardNumber').val(cardNumber);
+    /*$('#cardNumber').val(cardNumber);
     $('#cardName').val(cardName);
     $('#cvv').val(cvv);
     $('#cardType').val(cardType);
     setSelectIdx(cardMonth,'cardMonth');
-	setSelectIdx(cardYear,'cardYear');
+	setSelectIdx(cardYear,'cardYear');*/
 }
 
 function setSelectIdx(idx, elementStr){
