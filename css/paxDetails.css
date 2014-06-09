@@ -58,3 +58,7 @@ body{
 	float:left;
 	width:50%;
 }
+
+.card-type{
+	width: 3em !important;
+}
