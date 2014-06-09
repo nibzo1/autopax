@@ -1,6 +1,6 @@
 $(function() {
 
-	var cards = {
+	/*var cards = {
 		"VI" : "4111111111111111",
 		"VIE" : "4444333322221111",
 		"MCA" : "343434343434343",
@@ -17,7 +17,7 @@ $(function() {
         }
 	});
 
-
+*/
 	var max = 0;
 
 	$("label").width(max);
