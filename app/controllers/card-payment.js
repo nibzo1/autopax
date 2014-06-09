@@ -12,8 +12,20 @@ angular
 				});
 
 				setTimeout(function() {
-				   $('#error-'+type).html('');
+				   div.html('');
 				}, 5000);
+            }
+        }
+    })
+    .factory('setStatusService', function () {
+        return {
+            setStatus: function (txt, type) {
+
+				var status = $('#status-'+type);
+				status.html(txt);
+				setTimeout(function() {
+					status.html('');
+				}, 750);
             }
         }
     })
@@ -76,7 +88,7 @@ angular
             }
         }
     })
-	.controller('Cards', function ($scope, $http, validationService, localStorageService) {
+	.controller('Cards', function ($scope, $http, setStatusService, validationService, localStorageService) {
 
 		//card configuration json
 		$scope.cardOptions = {
@@ -182,6 +194,7 @@ angular
 				localStorageService.clearAll();
 				localStorageService.remove('CardOptions');
 				localStorageService.set('CardOptions', $scope.cardOptions);
+				setStatusService.setStatus('Options Saved.','card');
 			}
 			//console.log($scope.cardOptions);
 		};
