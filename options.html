@@ -1,10 +1,12 @@
-<html ng-csp ng-app>
+<html ng-app="autopax">
+<!-- <html ng-csp ng-app> -->
 	<head>
 		<meta charset="utf-8">
 		<title>AutoPax Config</title>
 		<link href="css/smoothness/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
 		<link href="css/paxDetails.css" rel="stylesheet">
 		<link href="css/tasks.css" rel="stylesheet">
+		<script src="libs/angular.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="tabs">
@@ -624,90 +626,65 @@
 					</div>
 				</div>
 			</div>
-			<div id="paymentOpts">
-				<div>
-					<div class="label-position">Card Type</div>
-					<div class="input-position">
-						<select id="cardType">
-							<option value="AX" selected="">American Express</option>
-							<option value="DC">Diners Club</option>
-							<option value="MCA">Master Card</option>
-							<option value="VI">Visa</option>
-							<option value="VIE">Visa Electron</option>
-						</select>
-					</div>
-				</div>
 
-				<br></br>
-				<div>
-					<div class="label-position">Card Number</div>
-					<div class="input-position">
-						<input type="text" id="cardNumber"/>
-					</div>
-				</div>
-				<br></br>
-				<div>
-					<div class="label-position">Card Name</div>
-					<div class="input-position">
-						<input type="text" id="cardName"/>
-					</div>
-				</div>
-				<br></br>
-				<div>
-					<div class="label-position">Expiry Month</div>
-					<div class="input-position">
-						<select id="cardMonth" size="1">
-							<option value="*"></option>
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-						</select>
-					</div>
-				</div>
-				<br></br>
-				<div>
-					<div class="label-position">Expiry Year</div>
-					<div class="input-position">
-						<select id="cardYear" size="1">
-							<option value="*"></option>
-							<option value="2013">2013</option>
-							<option value="2014">2014</option>
-							<option value="2015">2015</option>
-							<option value="2016">2016</option>
-							<option value="2017">2017</option>
-							<option value="2018">2018</option>
-							<option value="2019">2019</option>
-							<option value="2020">2020</option>
-							<option value="2021">2021</option>
-							<option value="2022">2022</option>
-							<option value="2023">2023</option>
-						</select>
-					</div>
-				</div>
-				<br></br>
-				<div>
-					<div class="label-position">CVC</div>
-					<div class="input-position">
-						<input type="text" id="cvv"/>
-						<br></br>
-						<button id="cardOptions">Save</button>
-						<div style="colour:red;">
-							<ul id="error-card">
-							</ul>
+			<!-- Credit Card configuration template -->
+			<form ng-submit="submit()" ng-controller="Cards">
+				<div id="paymentOpts">
+					<div>
+						<div class="label-position">Card Type</div>
+						<div class="input-position">
+							<select id="cardType" ng-model="selectedCard" ng-options="card.name for card in cards" required></select>
 						</div>
-						<label id="status-card"/>
+					</div>
+					<br></br>
+					<div>
+						<div class="label-position">Card Number</div>
+						<div class="input-position">
+							<input type="text" id="cardNumber" ng-model="selectedCard.number"/>
+							<input class="card-type" type="text" id="cardType" ng-model="selectedCard.type"/>
+						</div>
+					</div>
+					<br></br>
+					<div>
+						<div class="label-position">Card User</div>
+						<div class="input-position">
+							<input type="text" id="cardName" ng-model="card_user" ng-change="setCardUser()"/>
+						</div>
+					</div>
+					<br></br>
+					<div>
+						<div class="label-position">Expiry Month</div>
+						<div class="input-position">
+							<select id="cardMonth" size="1" ng-model="expMonth" ng-options="month for month in months"></select>
+						</div>
+					</div>
+					<br></br>
+					<div>
+						<div class="label-position">Expiry Year</div>
+						<div class="input-position">
+							<select id="cardYear" size="1" ng-model="expYear" ng-options="year for year in years"></select>
+						</div>
+					</div>
+					<br></br>
+					<div>
+						<div class="label-position">CVC</div>
+						<div class="input-position">
+							<input type="text" id="cvv" ng-model="cvv"/>
+							<br></br>
+							<button type="submit" id="save" value="Submit">Save</button>
+							<div style="colour:red;">
+								<ul id="error-card">
+									<li ng-repeat="error in errors">{{error}}</li>
+								</ul>
+							</div>
+							<label id="status-card"/>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
+
+
+
 			<div id="config">
 				<h4>Passenger Details</h4>
 				<input rel="config" type="checkbox" id="ibe" value="Bike">IBE<br>
@@ -776,9 +753,12 @@
 		<script src="libs/underscore.js" type="text/javascript"></script>
 		<script src="libs/backbone.js" type="text/javascript"></script>
 		<script src="libs/backbone-localstorage.js" type="text/javascript"></script>
+		<script src="libs/angular-local-storage.min.js" type="text/javascript"></script>
+
 		<script src="app/ui.js" type="text/javascript"></script>
 		<script src="app/tasks.js" type="text/javascript"></script>
 		<script src="app/options.js" type="text/javascript"></script>
 		<script src="app/optionsConfig.js" type="text/javascript"></script>
+		<script src="app/controllers.js" type="text/javascript"></script>
 	</footer>
 </html>
