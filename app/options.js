@@ -1,12 +1,12 @@
 // Saves options to localStorage.
 $(document).ready(function(){
-	restore_options();
+	/*restore_options();
 	$('#paxOptions').on('click', function(){
 		save_options_pax();
 	});
 	$('#cardOptions').on('click', function(){
 		save_options_card();
-	});
+	});*/
 });
 
 function save_options_pax() {
