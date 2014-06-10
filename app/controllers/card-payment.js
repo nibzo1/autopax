@@ -1,54 +1,6 @@
 angular
 	//create contacts module
 	.module('autopax', ['LocalStorageModule'])
-    /*.factory('errorService', function () {
-        return {
-            addErrors: function (err, type) {
-            	var div = $('#error-'+type);
-
-				angular.forEach(err, function(i) {
-					console.log(i);
-					div.html(div.html() + '<li>'+i+'</li>');
-				});
-
-				setTimeout(function() {
-				   div.html('');
-				}, 5000);
-            }
-        }
-    })
-    .factory('setStatusService', function () {
-        return {
-            setStatus: function (txt, type) {
-
-				var status = $('#status-'+type);
-				status.html(txt);
-				setTimeout(function() {
-					status.html('');
-				}, 750);
-            }
-        }
-    })*/
-    /*.factory('ItemListLoaderService', function ($http) {
-		var ItemListLoaderService = {};
-
-    	ItemListLoaderService.data = {};
-
-    	//Gets the list of nuclear weapons
-   		 ItemListLoaderService.loadList = function (path, file) {
-
-	            $http.get(path + '/' + file)
-					.then(function(data) {
-						console.log('data.data');
-						console.log(data.data);
-	                	ItemListLoaderService.data.d = data.data;
-	            	});
-	            	console.log('data.data2222');
-					console.log(ItemListLoaderService.data);
-       			 return ItemListLoaderService.data;
-	        }
-	    return ItemListLoaderService;
-    })*/
 	.factory('validationService', function () {
         return {
             validateCard: function (cardType, cardNumber, cardUser, expMonth, expYear, cvv) {
@@ -194,6 +146,37 @@ angular
 		console.log($scope.customerTypes);
 
 		$scope.profileType = $scope.customerTypes[0];
+
+				//save credit card json to local storage
+		$scope.submit = function() {
+			var firstName = $scope.customer.firstName;
+			var surame = $scope.customer.surame;
+			var email = $scope.customer.email;
+			var phone = $scope.customer.phone;
+			var groupName = $scope.customer.groupName;
+			var contactAddress1 = $scope.customer.contactAddress1;
+			var contactCity = $scope.customer.contactCity;
+			var billPostcode = $scope.customer.billPostcode;
+			var numberPlate = $scope.customer.numberPlate;
+			var newsletter = $scope.customer.newsletter;
+			var profileType = $scope.profileType.id;
+			var nationalityIDX = $scope.customer.nationalityIDX;
+			var countryIDX = $scope.customer.countryIDX;
+
+			/*if(validationService.validateCard(cardType, cardNumber, cardUser, expMonth, expYear, cvv)){
+				$scope.cardOptions.cardType = cardType;
+				$scope.cardOptions.cardNumber = cardNumber;
+				$scope.cardOptions.cardUser = cardUser;
+				$scope.cardOptions.expMonth = expMonth;
+				$scope.cardOptions.expYear = expYear;
+				$scope.cardOptions.cvv = cvv;
+*/
+				//update local storage
+				/*localStorageService.clearAll();
+				localStorageService.remove('CardOptions');
+				localStorageService.set('CardOptions', $scope.cardOptions);
+				validationService.setStatus('Options Saved.','card');*/
+			}
 
 
 		/*console.log($scope.profileType.value);*/
