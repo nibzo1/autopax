@@ -17,7 +17,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 });
 
 function doAutopax(status){
-	console.log("int he places statrus = "+status);
+/*	console.log("int he places statrus = "+status);
 
 	if(status){
 		console.log("made it in status");
@@ -36,5 +36,5 @@ function doAutopax(status){
 				$('.allPax').each(function(){$(this).click()});
 			});
 		});
-	}
+	}*/
 }
