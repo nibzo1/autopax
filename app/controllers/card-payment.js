@@ -1,6 +1,116 @@
 angular
 //create contacts module
 .module('autopax', ['LocalStorageModule'])
+.controller('Config', function ($scope, $http, ModelService, CardsListService, validationService, localStorageService, utilsService) {
+
+	var model = ModelService;
+
+
+	$scope.config = model.config();
+	$scope.configOpts = [];
+
+	// $scope.profile = config;
+
+	//set scope variables
+	// $scope.config = model.config();
+
+	// $scope.customer
+
+	console.log($scope.config)
+
+
+    //initialise ui scope
+	var lsJson = localStorageService.get('Config');
+	if(lsJson){
+		/*var cardIdx = utilsService.idxSelect($scope.cards, lsJson.cardType, 'str', 'type');*/
+		/*{type: 'customer', id: 'ibe', enabled: 'false', text: 'IBE'},
+		{type: 'customer', id: 'grp', enabled: 'false', text: 'Group'},
+		{type: 'customer', id: 'nf', enabled: 'false', text: 'Name Firming'},
+		{type: 'customer', id: 'exp', enabled: 'false', text: 'Express'},
+		{type: 'profile', id: 'prof', enabled: 'false', text: 'Profile'},
+		{type: 'payment', id: 'card', enabled: 'false', text: 'Card Payments'},
+		{type: 'misc', id: 'tc', enabled: 'false', text: 'Terms & Conditions'},
+		{type: 'misc', id: 'ap', enabled: 'false', text: 'All Pax'}*/
+
+		// $scope.ibe =lsJson.
+/*
+	 	$scope.customer = $scope.cards[cardIdx];
+	 	$scope.card_user = lsJson.cardUser;
+	 	$scope.expMonth = lsJson.expMonth;
+	 	$scope.expYear = lsJson.expYear;
+	 	$scope.cvv = lsJson.cvv;*/
+	}else{
+		//default card year to next year
+		// var yearIdx = utilsService.idxSelect($scope.years, new Date().getFullYear(), 'str', null);
+
+		$scope.configOpts.exp = utilsService.isChecked($scope.config, 'misc', 'exp');
+		console.log('loading exp scope' );
+		console.log($scope.configOpts.exp );
+
+		//default lists to the first item
+	 	/*$scope.selectedCard = $scope.cards[0];
+	 	$scope.expMonth = $scope.months[0];
+	 	$scope.expYear = $scope.years[yearIdx + 1];*/
+	 }
+
+	//save credit card json to local storage
+	$scope.change = function(id, type) {
+
+		console.log('type = '+type);
+		console.log('id = '+id);
+		console.log('$scope.exp = '+$scope.configOpts.exp);
+
+
+
+		angular.forEach($scope.config, function(value, key) {
+			if(value.type === type && value.id === id){
+				// checked = 'true';
+				console.log('************8');
+				// $scope.configOpts.exp = true;
+
+				console.log($scope.configOpts);
+
+				localStorageService.remove('CopfigOptions');
+				localStorageService.set('CopfigOptions', $scope.configOpts);
+			}
+		});
+
+		/*var cardType = $scope.selectedCard.type;
+		var cardNumber = $scope.selectedCard.number;
+		var cardUser = $scope.card_user;
+		var expMonth = $scope.expMonth;
+		var expYear = $scope.expYear;
+		var cvv = $scope.cvv;
+
+		if(validationService.validateCard(cardType, cardNumber, cardUser, expMonth, expYear, cvv)){
+			$scope.cardOptions.cardType = cardType;
+			$scope.cardOptions.cardNumber = cardNumber;
+			$scope.cardOptions.cardUser = cardUser;
+			$scope.cardOptions.expMonth = expMonth;
+			$scope.cardOptions.expYear = expYear;
+			$scope.cardOptions.cvv = cvv;*/
+
+			//update local storage
+			/*localStorageService.remove('CardOptions');
+			localStorageService.set('CardOptions', $scope.cardOptions);
+			validationService.setStatus('Options Saved.','card');
+		}*/
+		console.log($scope.config);
+	};
+
+	//clear customer json from local storage
+/*	$scope.clear = function() {
+		var yearIdx = utilsService.idxSelect($scope.years, new Date().getFullYear(), 'str', null);
+		$scope.cardOptions = ModelService.cardOptions();
+		$scope.selectedCard = $scope.cards[0];
+		$scope.expMonth = $scope.months[0];
+		$scope.expYear = $scope.years[yearIdx + 1];
+		$scope.card_user = '';
+		$scope.cvv = '';
+		localStorageService.remove('CardOptions');
+	};*/
+	console.log($scope);
+})
 .controller('Cards', function ($scope, $http, ModelService, CardsListService, validationService, localStorageService, utilsService) {
 
 	//set scope variables
@@ -177,6 +287,15 @@ angular
 				}
 			});
 			return idx;
+    	},
+    	isChecked: function (list, type, id) {
+    		var checked = false;
+			angular.forEach(list, function(value, key) {
+				if(value.type === type && value.id === id && value.enabled === 'true'){
+					checked = 'true';
+				}
+			});
+			return checked;
     	}
     }
 })
@@ -298,35 +417,50 @@ angular
 })
 .factory('ModelService', function () {
 		return {
- 		cardOptions: function() {
-	 		var cardOptions = {
-				'cardType' : '',
-				'cardNumber' : '',
-				'cardUser' : '',
-				'expMonth' : '',
-				'expYear' : '',
-				'cvv' : ''
-			};
-			return cardOptions;
-		},
-		customer: function() {
-	 		var customer = {
-				'firstName' : '',
-				'surname' : '',
-				'email' : '',
-				'phone' : '',
-				'groupName' : '',
-				'contactAddress1' : '',
-				'contactCity' : '',
-				'billPostcode' : '',
-				'numberPlate' : '',
-				'newsletter' : '',
-				'profileType' : '',
-				'nationality' : '',
-				'country' : ''
-			};
-			return customer;
-		}
+	 		cardOptions: function() {
+		 		var cardOptions = {
+					'cardType' : '',
+					'cardNumber' : '',
+					'cardUser' : '',
+					'expMonth' : '',
+					'expYear' : '',
+					'cvv' : ''
+				};
+				return cardOptions;
+			},
+			customer: function() {
+		 		var customer = {
+					'firstName' : '',
+					'surname' : '',
+					'email' : '',
+					'phone' : '',
+					'groupName' : '',
+					'contactAddress1' : '',
+					'contactCity' : '',
+					'billPostcode' : '',
+					'numberPlate' : '',
+					'newsletter' : '',
+					'profileType' : '',
+					'nationality' : '',
+					'country' : ''
+				};
+				return customer;
+			},
+			config: function() {
+		 		var config = [
+					{type: 'customer', id: 'ibe', enabled: 'false', text: 'IBE'},
+					{type: 'customer', id: 'grp', enabled: 'false', text: 'Group'},
+					{type: 'customer', id: 'nf', enabled: 'false', text: 'Name Firming'},
+					{type: 'customer', id: 'exp', enabled: 'false', text: 'Express'},
+					{type: 'profile', id: 'prof', enabled: 'false', text: 'Profile'},
+					{type: 'payment', id: 'card', enabled: 'false', text: 'Card Payments'},
+					{type: 'misc', id: 'np', enabled: 'false', text: 'Number Plate'},
+					{type: 'misc', id: 'tc', enabled: 'false', text: 'Terms & Conditions'},
+					{type: 'misc', id: 'ap', enabled: 'false', text: 'All Pax'}
+		        ];
+
+				return config;
+			}
 		}
 })
 .factory('CardsListService', function () {
