@@ -10,13 +10,34 @@ status("allpaxenabled");
 
 //listen for request from script
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-	if (request.method == "getLocalStorage"){
+
+	if(request.method == "getLocalStorage"){
 		sendResponse({data: localStorage[request.key]});
+	}
+	else if (request.method == "getConfig"){
+		sendResponse({data: getValue(JSON.parse(localStorage[request.key]), request.value)});
 	}
     else{
 		sendResponse({});
 	}
 });
+
+
+//utility method to get a value from json using key
+function getValue(myJSON, test){
+    var str = '';
+    for (var key in myJSON) {
+        if (myJSON.hasOwnProperty(key) && String(test) === String(key)) {
+            str = myJSON[key];
+        }
+    }
+    return str;
+}
+
+
+
+
+
 
 //application controll functions
 function checkboxOnClick(info, tab) {
