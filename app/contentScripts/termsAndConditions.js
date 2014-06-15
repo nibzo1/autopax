@@ -1,4 +1,4 @@
-chrome.extension.sendRequest({method: "getLocalStorage", key: "tacenabled"}, function(response) {
+chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "tc"}, function(response) {
 	if(response && response.data == 'true'){
 		doTac(true);
 	}

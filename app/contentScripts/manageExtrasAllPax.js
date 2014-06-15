@@ -4,7 +4,7 @@ chrome.extension.sendRequest({method: "getLocalStorage", key: "allpaxenabled"}, 
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+/*chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request == "allpaxenabled"){
 		allPax(true);
 	}
@@ -14,14 +14,14 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request == "allpaxdisabled"){
 		allPax(false);
 	}
-});
+});*/
 
 function allPax(status){
-	if(status){
+	/*if(status){
 		$('#continue-btn').live('click', function(){
 			$('.allPax').each(function(){
 			  $(this).click();
 			});
 		});
-	}
+	}*/
 }

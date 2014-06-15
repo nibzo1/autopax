@@ -1,10 +1,10 @@
-chrome.extension.sendRequest({method: "getLocalStorage", key: "numpenabled"}, function(response) {
+chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "np"}, function(response) {
 	if(response && response.data == 'true'){
-		doNumPlate(numberPlate);
+		doNumPlate(customer);
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+/*chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request == "numpenabled"){
 		doNumPlate(numberPlate);
 	}
@@ -14,7 +14,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request == "numpdisabled"){
 		doNumPlate("");
 	}
-});
+});*/
 
 function doNumPlate(numberPlate){
 	var suffix = function (idx) {
@@ -22,11 +22,11 @@ function doNumPlate(numberPlate){
 	};
 	$('input.standard').each(function (idx, ele) {
 		ele.focus();
-		if(numberPlate===''){
+		if(customer.numberPlate===''){
 			ele.value = '';
 		}
 		else{
-			ele.value = numberPlate + suffix(idx);
+			ele.value = customer.numberPlate + suffix(idx);
 		}
 	});
 }
