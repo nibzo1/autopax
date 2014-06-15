@@ -194,35 +194,22 @@
 				</div>
 			</form>
 
-
-<!--
-					{type: 'customer', id: 'ibe', enabled: 'false', text: 'IBE'},
-					{type: 'customer', id: 'grp', enabled: 'false', text: 'Group'},
-					{type: 'customer', id: 'nf', enabled: 'false', text: 'Name Firming'},
-					{type: 'customer', id: 'exp', enabled: 'false', text: 'Express'},
-					{type: 'profile', id: 'prof', enabled: 'false', text: 'Profile'},
-					{type: 'payment', id: 'card', enabled: 'false', text: 'Card Payments'},
-					{type: 'misc', id: 'tc', enabled: 'false', text: 'Terms & Conditions'},
-					{type: 'misc', id: 'ap', enabled: 'false', text: 'All Pax'} -->
-
-
-
 			<!-- Credit Card configuration template -->
 			<form ng-submit="submit()" ng-controller="Config">
 				<div id="config">
 					<h4>Passenger Details</h4>
-					<input rel="config" type="checkbox" ng-model="configOpts.ibe" ng-click="change('exp', 'customer')">IBE<br>
-					<input rel="config" type="checkbox" ng-model="configOpts.grp" ng-click="change('grp', 'customer')">Group<br>
-					<input rel="config" type="checkbox" ng-model="configOpts.nf" ng-click="change('nf', 'customer')">Name Firming<br>
-					<input type="checkbox" ng-checked="exp" ng-model="configOpts.exp" ng-click="change('exp', 'customer')">Express<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.ibe" ng-click="change()">IBE<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.grp" ng-click="change()">Group<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.nf" ng-click="change()">Name Firming<br>
+					<input type="checkbox" ng-checked="exp" ng-model="configOpts.exp" ng-click="change()">Express<br>
 					<h4>Profile</h4>
-					<input rel="config" type="checkbox" ng-model="configOpts.prof" ng-click="change('prof', 'profile')">Profile Details<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.prof" ng-click="change()">Profile Details<br>
 					<h4>Payment</h4>
-					<input rel="config" type="checkbox" ng-model="configOpts.crd" ng-click="change('crd', 'payment')">Credit Card<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.crd" ng-click="change()">Credit Card<br>
 					<h4>Additional</h4>
-					<input rel="config" type="checkbox" ng-model="configOpts.np" ng-click="change('np', 'misc')">Number plate<br>
-					<input rel="config" type="checkbox" ng-model="configOpts.tc" ng-click="change('tc', 'misc')">Terms and Conditions<br>
-					<input rel="config" type="checkbox" ng-model="configOpts.ap" ng-click="change('ap', 'misc')">All Pax<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.np" ng-click="change()">Number plate<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.tc" ng-click="change()">Terms and Conditions<br>
+					<input rel="config" type="checkbox" ng-model="configOpts.ap" ng-click="change()">All Pax<br>
 					<div style="colour:red;">
 						<ul id="error-config">
 						</ul>
@@ -231,7 +218,7 @@
 				</div>
 			</form>
 
-
+			<!-- todo - backbone example applicaiton -->
 			<div id="tasks">
 				<h4>Tasks</h4>
 				<div id="todoapp">
@@ -284,7 +271,7 @@
 
 		<script src="app/ui.js" type="text/javascript"></script>
 		<script src="app/tasks.js" type="text/javascript"></script>
-		<script src="app/options.js" type="text/javascript"></script>
+		<!--<script src="app/options.js" type="text/javascript"></script>-->
 		<!--<script src="app/optionsConfig.js" type="text/javascript"></script>-->
 		<script src="app/controllers/card-payment.js" type="text/javascript"></script>
 	</footer>
