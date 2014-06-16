@@ -1,18 +1,16 @@
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "tc"}, function(response) {
-	if(response && response.data == 'true'){
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "tc"}, function(response) {
+	if(response && response.data === true){
 		doTac(true);
 	}
 });
 
+//handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "tacenabled"){
-		doTac(true);
+	if(request.data == true){
+		doPax(true);
 	}
-});
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "tacdisabled"){
-		doTac(false);
+	else if(request.data == false){
+		doPax(false);
 	}
 });
 

@@ -1,21 +1,19 @@
 //credit card auto populate
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "card"}, function(response) {
-	if(response && response.data == 'true'){
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "card"}, function(response) {
+	if(response && response.data === true){
 		doCard(card)
 	}
 });
 
-/*chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "grpenabled"){
-		doCard(cardNumber,cardName,cardMonth,cardYear,cvv,cardType);
+//handle script being enabled/disabled from context menu checkbox
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request.data == true){
+		doCard(card);
+	}
+	else if(request.data == false){
+		doCard(null);
 	}
 });
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "grpdisabled"){
-		doPax("","","","","","");
-	}
-});*/
 
 function doCard(card){
 	var suffix = function (idx) {
@@ -23,9 +21,9 @@ function doCard(card){
 	};
 	if($('[name="CVC"]').length || $('[name="cardNumber"]').length || $('[name="cardHolderName"]').length || $('[name="expiryMonth"]').length || $('[name="expiryYear"]').length){
 		$('[name="cardNumber"]').val(card.cardNumber);
-		$('[name="cardHolderName"]').val(card.cardName);
-		$('[name="expiryMonth"]').prop('selectedIndex', card.cardMonth);
-		$('[name="expiryYear"]').prop('selectedIndex', card.cardYear);
+		$('[name="cardHolderName"]').val(card.cardUser);
+		$('[name="expiryMonth"]').val(card.expMonth);
+		$('[name="expiryYear"]').val(card.expYear);
 		$('[name="CVC"]').val(card.cvv);
 	}
 	if($('[name="paymentTypes"]').length){

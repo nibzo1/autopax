@@ -1,23 +1,24 @@
 //express pax details
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "exp"}, function(response) {
-	if(response && response.data == 'true'){
+//check to see if the script is enabled
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "exp"}, function(response) {
+	if(response && response.data === true){
 		doPax(customer);
 	}
 });
 
-/*chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "expenabled"){
-		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
+//handle script being enabled/disabled from context menu checkbox
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request.data == true){
+		doPax(customer);
+	}
+	else if(request.data == false){
+		doPax(null);
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "expdisabled"){
-		doPax("","","","","","","","");
-	}
-});*/
-
 function doPax(customer){
+
+	console.log(customer)
 
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
@@ -87,15 +88,26 @@ function doPax(customer){
 			ele.value = customer.billPostcode;
 		}
 	});
-	$('input[id$=-Nationality]').each(function (idx, ele) {
+	$('select[id$=-Nationality]').each(function (idx, ele) {
 		ele.focus();
-		if($(ele).val() === ''){
+		// if($(ele).val() === ''){
 			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}else{
-				ele.selectedIndex = customer.countryIDX;
+				ele.value = customer.nationality;
 			}
-		}
+		// }
+		ele.blur()
+	});
+	$('select[id$=-CountryName]').each(function (idx, ele) {
+		ele.focus();
+		// if($(ele).val() === ''){
+			if(customer.firstName===''){
+				ele.selectedIndex = 0;
+			}else{
+				ele.value = customer.country;
+			}
+		// }
 		ele.blur()
 	});
 }

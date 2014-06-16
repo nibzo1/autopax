@@ -1,18 +1,16 @@
-chrome.extension.sendRequest({method: "getLocalStorage", key: "allpaxenabled"}, function(response) {
-	if(response && response.data == 'true'){
+chrome.extension.sendRequest({method: "getConfig", key: "allpaxenabled"}, function(response) {
+	if(response && response.data === true){
 		doAutopax(true);
 	}
 });
 
+//handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "allpaxenabled"){
-		doAutopax(true);
+	if(request.data == true){
+		doPax(true);
 	}
-});
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "allpaxdisabled"){
-		doAutopax(false);
+	else if(request.data == false){
+		doPax(false);
 	}
 });
 

@@ -1,21 +1,19 @@
 //profile pax details
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "prof"}, function(response) {
-	if(response && response.data == 'true'){
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "prof"}, function(response) {
+	if(response && response.data === true){
 		doPax(customer);
 	}
 });
-/*
+
+//handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "profileenabled"){
-		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX, emailChecked, profileType,nationalityIDX);
+	if(request.data == true){
+		doPax(customer);
+	}
+	else if(request.data == false){
+		doPax(null);
 	}
 });
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "profiledisabled"){
-		doPax("","","","","","","","","","","");
-	}
-});*/
 
 function doPax(customer){
 	var suffix = function (idx) {
@@ -32,8 +30,8 @@ function doPax(customer){
 	$('[id$="BirthDate_month"]').prop('selectedIndex', 12);
 	$('[id$="BirthDate_year"]').prop('selectedIndex', 40);
 	$('[id$="BirthDate"]').val('1974-12-05');
-	$('[name="Profile/Customer/Address/CountryName/@Code"]').prop('selectedIndex', customer.countryIDX);
-	$('[name="Profile/Customer/@Nationality"]').prop('selectedIndex', customer.nationalityIDX);
+	$('[name="Profile/Customer/Address/CountryName/@Code"]').val(customer.country);
+	$('[name="Profile/Customer/@Nationality"]').val(customer.nationality);
 	$('[name="Profile/Customer/Address/AddressLine$1$"]').val(customer.contactAddress1);
 	$('[name="Profile/Customer/Address/CityName"]').val(customer.contactCity);
 	$('[name="Profile/Customer/Address/PostalCode"]').val(customer.billPostcode);
@@ -47,15 +45,15 @@ function doPax(customer){
 	$('[name="confirmEmail"]').val(customer.email);
 
 	$('#checkout.contactDetails.countryList').each(function (idx, ele) {
-		ele.selectedIndex = customer.countryIDX;
+		ele.selectedIndex = customer.country;
 	});
 
 	$('#checkout.contactDetails.merchantCountryList').each(function (idx, ele) {
-		ele.selectedIndex = customer.countryIDX;
+		ele.selectedIndex = customer.country;
 	});
 
 	$('#MemberLevelSelection').each(function (idx, ele) {
-		if($(this).val()===customer.profileType){
+		if($(this).val() === customer.profileType){
 			$(this).prop("checked", true);
 			$(this).prop("checked", 'checked')
 		}else{

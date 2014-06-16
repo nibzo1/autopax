@@ -1,20 +1,18 @@
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "np"}, function(response) {
-	if(response && response.data == 'true'){
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "np"}, function(response) {
+	if(response && response.data === true){
 		doNumPlate(customer);
 	}
 });
 
-/*chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "numpenabled"){
-		doNumPlate(numberPlate);
+//handle script being enabled/disabled from context menu checkbox
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request.data == true){
+		doNumPlate(customer);
+	}
+	else if(request.data == false){
+		doNumPlate(null);
 	}
 });
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "numpdisabled"){
-		doNumPlate("");
-	}
-});*/
 
 function doNumPlate(numberPlate){
 	var suffix = function (idx) {

@@ -1,21 +1,19 @@
 //name firming pax details
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "nf"}, function(response) {
-	if(response && response.data == 'true'){
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "nf"}, function(response) {
+	if(response && response.data === true){
 		doPax(customer);
 	}
 });
-/*
+
+//handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "nfenabled"){
-		doPax(firstName,surname,email,countryIDX);
+	if(request.data == true){
+		doPax(customer);
+	}
+	else if(request.data == false){
+		doPax(null);
 	}
 });
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "nfdisabled"){
-		doPax("","","","");
-	}
-});*/
 
 function doPax(customer){
 	var fc = 0;
@@ -146,7 +144,7 @@ function doPax(customer){
 	$('select.nameFirming').each(function (idx, ele) {
 		var n = new RegExp("nationality");
 		if (n.exec(ele.id)) {
-			ele.selectedIndex = customer.countryIDX;
+			ele.value = customer.nationality;
 		}
 	});
 	$('select.nameFirming').each(function (idx, ele) {

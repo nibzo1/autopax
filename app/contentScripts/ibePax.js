@@ -5,17 +5,15 @@ chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", valu
 	}
 });
 
-/*chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "ibeenabled"){
-		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
+//handle script being enabled/disabled from context menu checkbox
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request.data == true){
+		doPax(customer);
+	}
+	else if(request.data == false){
+		doPax(null);
 	}
 });
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "ibedisabled"){
-		doPax("","","","","","","","");
-	}
-});*/
 
 function doPax(customer){
 
@@ -78,11 +76,11 @@ function doPax(customer){
 	});
 	$('select.medium').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(customer.countryIDX == 0){
+			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
-				ele.selectedIndex = customer.countryIDX;
+				ele.value = customer.country;
 			}
 		}
 	});

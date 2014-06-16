@@ -1,21 +1,19 @@
 //group details auto populate
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ls.ConfigOptions", value: "grp"}, function(response) {
-	if(response && response.data == 'true'){
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "grp"}, function(response) {
+	if(response && response.data === true){
 		doPax(customer);
 	}
 });
 
-/*chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "grpenabled"){
-		doPax(groupName,firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
+//handle script being enabled/disabled from context menu checkbox
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request.data == true){
+		doPax(customer);
+	}
+	else if(request.data == false){
+		doPax(null);
 	}
 });
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "grpdisabled"){
-		doPax("","","","","","","","","");
-	}
-});*/
 
 function doPax(customer){
 	var suffix = function (idx) {
@@ -46,6 +44,6 @@ function doPax(customer){
 		ele.value = customer.billPostcode;
 	});
 	$('#bill-country').each(function (idx, ele) {
-		ele.selectedIndex = customer.countryIDX;
+		ele.value = customer.country;
 	});
 }
