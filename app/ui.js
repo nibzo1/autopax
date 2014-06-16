@@ -1,33 +1,10 @@
 $(function() {
 
-	/*var cards = {
-		"VI" : "4111111111111111",
-		"VIE" : "4444333322221111",
-		"MCA" : "343434343434343",
-		"DC" : "5555555555554444",
-		"AX" : "5454545454545454",
-		"VI2" : "36148900647913"
-	};
-
-	$('#cardType').on('change', function(){
-		 for (var key in cards) {
-        	if (cards.hasOwnProperty(key) && key === $(this).val()) {
-            	$("#cardNumber").val(cards[key]);
-            }
-        }
-	});
-
-*/
 	var max = 0;
 
 	$("label").width(max);
 
 	$("#tabs").tabs();
-
-    /*$("label").each(function(){
-        if ($(this).width() > max)
-            max = $(this).width();
-    });*/
 
 	$("#accordion").accordion();
 
