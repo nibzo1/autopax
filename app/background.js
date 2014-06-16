@@ -7,31 +7,31 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	else if (request.method === "getConfig"){
 		sendResponse({data: getValue(JSON.parse(localStorage[request.key]), request.value)});
 	}
-    else{
+	else{
 		sendResponse({});
 	}
 });
 
 //utility method to get a value from json using key
 function getValue(myJSON, test){
-    var str = '';
-    for (var key in myJSON) {
-        if (myJSON.hasOwnProperty(key) && String(test) === String(key)) {
-            str = myJSON[key];
-        }
-    }
-    return str;
+	var str = '';
+	for (var key in myJSON) {
+		if (myJSON.hasOwnProperty(key) && String(test) === String(key)) {
+			str = myJSON[key];
+		}
+	}
+	return str;
 }
 
 //set values in the localstorage json obj'z
 function setValue(jsonID, test, value){
 	var myJSON = JSON.parse(localStorage[jsonID]);
-    for (var key in myJSON) {
-        if (myJSON.hasOwnProperty(key) && String(test) === String(key)) {
-            myJSON[key] = value;
-        }
-    }
-    localStorage[jsonID] = JSON.stringify(myJSON);
+	for (var key in myJSON) {
+		if (myJSON.hasOwnProperty(key) && String(test) === String(key)) {
+			myJSON[key] = value;
+		}
+	}
+	localStorage[jsonID] = JSON.stringify(myJSON);
 }
 
 //application controll functions
