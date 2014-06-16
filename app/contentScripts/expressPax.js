@@ -12,13 +12,18 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 		doPax(customer);
 	}
 	else if(request.data == false){
-		doPax(null);
+		//wipe out json
+		var myJSON = customer;
+		for (var key in myJSON) {
+			if (myJSON.hasOwnProperty(key)) {
+				myJSON[key] = '';
+			}
+		}
+		doPax(myJSON);
 	}
 });
 
 function doPax(customer){
-
-	console.log(customer)
 
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
