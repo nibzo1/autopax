@@ -6,7 +6,7 @@ angular
 	var model = ModelService;
 
 	$scope.config = model.config();
-	$scope.configOpts ={};
+	$scope.configOpts = {};
 	$scope.configOpts.ibe = false;
 	$scope.configOpts.grp = false;
 	$scope.configOpts.nf = false;
@@ -20,12 +20,10 @@ angular
     //initialise ui scope
 	var lsJson = localStorageService.get('ConfigOptions');
 	if(lsJson){
-
 		$scope.configOpts.exp = lsJson.exp;
 		$scope.configOpts.ibe = lsJson.ibe;
 		$scope.configOpts.grp = lsJson.grp;
 		$scope.configOpts.nf = lsJson.nf;
-		$scope.configOpts.exp = lsJson.exp;
 		$scope.configOpts.prof = lsJson.prof;
 		$scope.configOpts.card = lsJson.card;
 		$scope.configOpts.np = lsJson.np;
@@ -34,11 +32,11 @@ angular
 	}
 
 	//save credit card json to local storage
-	$scope.change = function(id, type) {
+	$scope.change = function() {
 
 		localStorageService.remove('CopfigOptions');
 		localStorageService.remove('CopfigOptions');
-		localStorageService.set('ConfigOptions', $scope.configOpts);
+		localStorageService.set('ConfigOptions', JSON.stringify($scope.configOpts));
 
 		// console.log($scope.configOpts);
 	};
@@ -228,7 +226,7 @@ angular
     return {
         validateCustomer: function (firstName, surname, email, phone, groupName, contactAddress1, contactCity, billPostcode, numberPlate, newsletter, profileType, nationalityIDX, countryIDX) {
         	console.log('in validation service: firstName: '+firstName+' - surname: '+surname+' - email: '+email+' - groupName: '+groupName+' - contactAddress1:'+contactAddress1
-        								   +' - billPostcode: '+billPostcode+' - numberPlate: '+numberPlate+' - profileType: '+profileType+' - nationalityIDX: '+nationalityIDX +' - countryIDX: '+countryIDX);
+        				 + ' - billPostcode: '+billPostcode+' - numberPlate: '+numberPlate+' - profileType: '+profileType+' - nationalityIDX: '+nationalityIDX +' - countryIDX: '+countryIDX);
 			var validation = true;
         	var errors = [];
 
@@ -394,9 +392,9 @@ angular
 			var cards = [
 				{name: 'Visa', type: 'VI', number: '4111111111111111'},
 				{name: 'Visa Electron', type: 'VIE', number: '4444333322221111'},
-				{name: 'Master Card', type: 'MCA', number: '343434343434343'},
+				{name: 'Master Card', type: 'MCA', number: '5454545454545454'},
 				{name: 'Diners Club', type: 'DC', number: '5555555555554444'},
-				{name: 'American Express', type: 'AX', number: '5454545454545454'}
+				{name: 'American Express', type: 'AX', number: '343434343434343'}
 	        ];
 	        return cards;
     	},
