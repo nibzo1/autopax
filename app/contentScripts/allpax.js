@@ -1,20 +1,20 @@
 chrome.extension.sendRequest({method: "getConfig", key: "allpaxenabled"}, function(response) {
 	if(response && response.data === true){
-		doAutopax(true);
+		runScript(true);
 	}
 });
 
 //handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request.data == true){
-		doPax(true);
+		runScript(true);
 	}
 	else if(request.data == false){
-		doPax(false);
+		runScript(false);
 	}
 });
 
-function doAutopax(status){
+function runScript(status){
 /*	console.log("int he places statrus = "+status);
 
 	if(status){

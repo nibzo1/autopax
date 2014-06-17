@@ -1,21 +1,28 @@
 //name firming pax details
 chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "nf"}, function(response) {
 	if(response && response.data === true){
-		doPax(customer);
+		runScript(customer);
 	}
 });
 
 //handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request.data == true){
-		doPax(customer);
+		runScript(customer);
 	}
 	else if(request.data == false){
-		doPax(null);
+		//wipe out json
+		var myJSON = customer;
+		for (var key in myJSON) {
+			if (myJSON.hasOwnProperty(key)) {
+				myJSON[key] = '';
+			}
+		}
+		runScript(customer);
 	}
 });
 
-function doPax(customer){
+function runScript(customer){
 	var fc = 0;
 	var sc = 0;
 	var suffix = function (idx) {

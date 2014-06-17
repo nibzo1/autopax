@@ -2,14 +2,14 @@
 //check to see if the script is enabled
 chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "exp"}, function(response) {
 	if(response && response.data === true){
-		doPax(customer);
+		runScript(customer);
 	}
 });
 
 //handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request.data == true){
-		doPax(customer);
+		runScript(customer);
 	}
 	else if(request.data == false){
 		//wipe out json
@@ -19,11 +19,11 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 				myJSON[key] = '';
 			}
 		}
-		doPax(myJSON);
+		runScript(myJSON);
 	}
 });
 
-function doPax(customer){
+function runScript(customer){
 
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
@@ -39,13 +39,13 @@ function doPax(customer){
 	});
 	$('input[id$=-GivenName]').each(function (idx, ele) {
 		ele.focus();
-		if($(ele).val() === ''){
+		// if($(ele).val() === ''){
 			if(customer.firstName===''){
 				ele.value = customer.firstName;
 			}else{
 				ele.value = customer.firstName + suffix(idx);
 			}
-		}
+		// }
 		ele.blur()
 	});
 	$('input[id$=-Surname]').each(function (idx, ele) {
@@ -95,24 +95,24 @@ function doPax(customer){
 	});
 	$('select[id$=-Nationality]').each(function (idx, ele) {
 		ele.focus();
-		// if($(ele).val() === ''){
+		if($(ele).val() === ''){
 			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}else{
 				ele.value = customer.nationality;
 			}
-		// }
+		}
 		ele.blur()
 	});
 	$('select[id$=-CountryName]').each(function (idx, ele) {
 		ele.focus();
-		// if($(ele).val() === ''){
+		if($(ele).val() === ''){
 			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}else{
 				ele.value = customer.country;
 			}
-		// }
+		}
 		ele.blur()
 	});
 }

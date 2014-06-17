@@ -1,20 +1,27 @@
 chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "np"}, function(response) {
 	if(response && response.data === true){
-		doNumPlate(customer);
+		runScript(customer);
 	}
 });
 
 //handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request.data == true){
-		doNumPlate(customer);
+		runScript(customer);
 	}
 	else if(request.data == false){
-		doNumPlate(null);
+		//wipe out json
+		var myJSON = customer;
+		for (var key in myJSON) {
+			if (myJSON.hasOwnProperty(key)) {
+				myJSON[key] = '';
+			}
+		}
+		runScript(customer);
 	}
 });
 
-function doNumPlate(numberPlate){
+function runScript(numberPlate){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};

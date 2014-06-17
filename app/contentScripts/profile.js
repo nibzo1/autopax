@@ -1,21 +1,28 @@
 //profile pax details
 chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "prof"}, function(response) {
 	if(response && response.data === true){
-		doPax(customer);
+		runScript(customer);
 	}
 });
 
 //handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request.data == true){
-		doPax(customer);
+		runScript(customer);
 	}
 	else if(request.data == false){
-		doPax(null);
+		//wipe out json
+		var myJSON = customer;
+		for (var key in myJSON) {
+			if (myJSON.hasOwnProperty(key)) {
+				myJSON[key] = '';
+			}
+		}
+		runScript(customer);
 	}
 });
 
-function doPax(customer){
+function runScript(customer){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
@@ -37,7 +44,7 @@ function doPax(customer){
 	$('[name="Profile/Customer/Address/PostalCode"]').val(customer.billPostcode);
 	$('[name="Profile/Customer/Email"]').val(customer.email);
 
-	if(customer.emailChecked){
+	if(customer.newsletter){
 		$('#emailCheckbox').prop('checked', true);
 		$('#emailCheckbox').attr('checked','checked');
 		$('#emailCheckbox-hidden').prop('disabled', true);

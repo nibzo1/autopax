@@ -1,21 +1,29 @@
 //credit card auto populate
 chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "card"}, function(response) {
 	if(response && response.data === true){
-		doCard(card)
+		runScript(card)
 	}
 });
 
 //handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	if(request.data == true){
-		doCard(card);
+		runScript(card);
 	}
 	else if(request.data == false){
-		doCard(null);
+		runScript(null);
+		//wipe out json
+		var myJSON = card;
+		for (var key in myJSON) {
+			if (myJSON.hasOwnProperty(key)) {
+				myJSON[key] = '';
+			}
+		}
+		runScript(myJSON);
 	}
 });
 
-function doCard(card){
+function runScript(card){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
