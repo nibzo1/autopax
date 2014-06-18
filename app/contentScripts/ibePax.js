@@ -1,29 +1,35 @@
 //ibe pax details
-chrome.extension.sendRequest({method: "getLocalStorage", key: "ibeenabled"}, function(response) {
-	if(response && response.data == 'true'){
-		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "ibe"}, function(response) {
+	if(response && response.data === true){
+		runScript(customer);
 	}
 });
 
+//handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "ibeenabled"){
-		doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
+	if(request.data == true){
+		runScript(customer);
+	}
+	else if(request.data == false){
+		//wipe out json
+		var myJSON = customer;
+		for (var key in myJSON) {
+			if (myJSON.hasOwnProperty(key)) {
+				myJSON[key] = '';
+			}
+		}
+		runScript(customer);
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "ibedisabled"){
-		doPax("","","","","","","","");
-	}
-});
+function runScript(customer){
 
-function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
 	$('select.gender').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(firstName===''){
+			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
@@ -33,7 +39,7 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 	});
 	$('select.titlelarge').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(firstName===''){
+			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
@@ -44,11 +50,11 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 	$('input.xsmall.name').each(function (idx, ele) {
 		ele.focus();
 		if(!$(ele).is(':disabled') ){
-			if(firstName===''){
-				ele.value = firstName;
+			if(customer.firstName===''){
+				ele.value = customer.firstName;
 			}
 			else{
-				ele.value = firstName + suffix(idx);
+				ele.value = customer.firstName + suffix(idx);
 			}
 		}
 		ele.blur();
@@ -56,18 +62,18 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 	$('input.small.name').each(function (idx, ele) {
 		ele.focus();
 		if(!$(ele).is(':disabled') ){
-			if(surname===''){
-				ele.value = surname;
+			if(customer.surname===''){
+				ele.value = customer.surname;
 			}
 			else{
-				ele.value = surname + suffix(idx);
+				ele.value = customer.surname + suffix(idx);
 			}
 		}
 		ele.blur();
 	});
 	$('select.age').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(firstName===''){
+			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
@@ -77,61 +83,61 @@ function doPax(firstName,surname,email,phone,contactAddress1,contactCity,billPos
 	});
 	$('select.medium').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(countryIDX == 0){
+			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
-				ele.selectedIndex = countryIDX;
+				ele.value = customer.country;
 			}
 		}
 	});
 	$('#email1, #email2').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(surname===''){
+			if(customer.email===''){
 				ele.value = '';
 			}
 			else{
-				ele.value = email;
+				ele.value = customer.email;
 			}
 		}
 	});
 	$('#phone1').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(phone===''){
+			if(customer.phone===''){
 				ele.value = '';
 			}
 			else{
-				ele.value = phone;
+				ele.value = customer.phone;
 			}
 		}
 	});
 	$('#contact-address1').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(contactAddress1===''){
+			if(customer.contactAddress1===''){
 				ele.value = '';
 			}
 			else{
-				ele.value = contactAddress1;
+				ele.value = customer.contactAddress1;
 			}
 		}
 	});
 	$('#contact-city').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(contactCity===''){
+			if(customer.contactCity===''){
 				ele.value = '';
 			}
 			else{
-				ele.value = contactCity;
+				ele.value = customer.contactCity;
 			}
 		}
 	});
 	$('#bill-postcode').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
-			if(billPostcode===''){
+			if(customer.billPostcode===''){
 				ele.value = '';
 			}
 			else{
-				ele.value = billPostcode;
+				ele.value = customer.billPostcode;
 			}
 		}
 	});

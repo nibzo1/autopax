@@ -43,18 +43,18 @@ body{
 .fakewindowcontain .ui-widget-overlay {
 	position: absolute;
 }
-
 .label-padding label{
 	width: 100px;
 
 }
-
 .label-position{
 	float:left;
 	width:7%
 }
-
 .input-position{
 	float:left;
 	width:50%;
+}
+.card-type{
+	width: 3em !important;
 }

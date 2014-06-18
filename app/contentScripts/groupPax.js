@@ -1,51 +1,56 @@
 //group details auto populate
-chrome.extension.sendRequest({method: "getLocalStorage", key: "grpenabled"}, function(response) {
-	if(response && response.data == 'true'){
-		doPax(groupName,firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "grp"}, function(response) {
+	if(response && response.data === true){
+		runScript(customer);
 	}
 });
 
+//handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "grpenabled"){
-		doPax(groupName,firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX);
+	if(request.data == true){
+		runScript(customer);
+	}
+	else if(request.data == false){
+		//wipe out json
+		var myJSON = customer;
+		for (var key in myJSON) {
+			if (myJSON.hasOwnProperty(key)) {
+				myJSON[key] = '';
+			}
+		}
+		runScript(customer);
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "grpdisabled"){
-		doPax("","","","","","","","","");
-	}
-});
-
-function doPax(groupName,firstName,surname,email,phone,contactAddress1,contactCity,billPostcode,countryIDX){
+function doPax(customer){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
 	$('#groupName').each(function (idx, ele) {
-		ele.value = groupName;
+		ele.value = customer.groupName;
 	});
 	$('input.firstName').each(function (idx, ele) {
-		ele.value = firstName;
+		ele.value = customer.firstName;
 	});
 	$('input.surname').each(function (idx, ele) {
-		ele.value = surname;
+		ele.value = customer.surname;
 	});
 	$('#email1').each(function (idx, ele) {
-		ele.value = email;
+		ele.value = customer.email;
 	});
 	$('#phone1').each(function (idx, ele) {
-		ele.value = phone;
+		ele.value = customer.phone;
 	});
 	$('#contact-address1').each(function (idx, ele) {
-		ele.value = contactAddress1;
+		ele.value = customer.contactAddress1;
 	});
 	$('#contact-city').each(function (idx, ele) {
-		ele.value = contactCity;
+		ele.value = customer.contactCity;
 	});
 	$('#bill-postcode').each(function (idx, ele) {
-		ele.value = billPostcode;
+		ele.value = customer.billPostcode;
 	});
 	$('#bill-country').each(function (idx, ele) {
-		ele.selectedIndex = countryIDX;
+		ele.value = customer.country;
 	});
 }

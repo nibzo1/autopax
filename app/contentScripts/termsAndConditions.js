@@ -1,22 +1,20 @@
-chrome.extension.sendRequest({method: "getLocalStorage", key: "tacenabled"}, function(response) {
-	if(response && response.data == 'true'){
-		doTac(true);
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "tc"}, function(response) {
+	if(response && response.data === true){
+		runScript(true);
 	}
 });
 
+//handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "tacenabled"){
-		doTac(true);
+	if(request.data == true){
+		runScript(true);
+	}
+	else if(request.data == false){
+		runScript(false);
 	}
 });
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request == "tacdisabled"){
-		doTac(false);
-	}
-});
-
-function doTac(status){
+function runScript(status){
 	if(status){
 		$('input[type="checkbox"]').prop("checked", "true");
 		$('#ferry-information-agree').val("true");
