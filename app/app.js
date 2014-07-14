@@ -34,8 +34,7 @@ angular
 	//save credit card json to local storage
 	$scope.change = function() {
 
-		localStorageService.remove('CopfigOptions');
-		localStorageService.remove('CopfigOptions');
+		localStorageService.remove('ConfigOptions');
 		localStorageService.set('ConfigOptions', JSON.stringify($scope.configOpts));
 
 		// console.log($scope.configOpts);
