@@ -47,6 +47,7 @@ function runScript(customer){
 	if(customer.newsletter){
 		$('#emailCheckbox').prop('checked', true);
 		$('#emailCheckbox').attr('checked','checked');
+		$('#emailCheckbox').val('checked');
 		$('#emailCheckbox-hidden').prop('disabled', true);
 	}
 	$('[name="confirmEmail"]').val(customer.email);
