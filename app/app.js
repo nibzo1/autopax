@@ -36,7 +36,6 @@ angular
 
 		localStorageService.remove('ConfigOptions');
 		localStorageService.set('ConfigOptions', JSON.stringify($scope.configOpts));
-		// console.log($scope.configOpts);
 	};
 
 	//open config options from popup
@@ -45,8 +44,6 @@ angular
 			url: 'options.html'
 		});
 	};
-
-	// console.log($scope);
 })
 .controller('Cards', function ($scope, $http, ModelService, CardsListService, validationService, localStorageService, utilsService) {
 
@@ -98,7 +95,6 @@ angular
 			localStorageService.set('CardOptions', $scope.cardOptions);
 			validationService.setStatus('Options Saved.', 'card');
 		}
-		//console.log($scope.cardOptions);
 	};
 
 	//clear customer json from local storage
@@ -112,7 +108,6 @@ angular
 		$scope.cvv = '';
 		localStorageService.remove('CardOptions');
 	};
-	//console.log($scope);
 })
 .controller('Customer', function ($scope, $http, ModelService, CustomerListService, validationService, localStorageService, utilsService) {
 
@@ -191,7 +186,6 @@ angular
 		$scope.nationality = $scope.countries[0];
 		localStorageService.remove('CustomerOptions');
 	};
-	// console.log($scope);
 })
 .factory('utilsService', function () {
     return {
@@ -230,9 +224,7 @@ angular
 .factory('validationService', function () {
     return {
         validateCustomer: function (firstName, surname, email, phone, groupName, contactAddress1, contactCity, billPostcode, numberPlate, newsletter, profileType, nationalityIDX, countryIDX) {
-        	console.log('in validation service: firstName: '+firstName+' - surname: '+surname+' - email: '+email+' - groupName: '+groupName+' - contactAddress1:'+contactAddress1
-        				 + ' - billPostcode: '+billPostcode+' - numberPlate: '+numberPlate+' - profileType: '+profileType+' - nationalityIDX: '+nationalityIDX +' - countryIDX: '+countryIDX);
-			var validation = true;
+        	var validation = true;
         	var errors = [];
 
 			if(typeof firstName === 'undefined' || firstName === ''){
@@ -290,8 +282,6 @@ angular
 			return validation;
 		},
 		validateCard: function (cardType, cardNumber, cardUser, expMonth, expYear, cvv) {
-			//console.log('in validation service: cardType: '+cardType+' - cardNumber: '+cardNumber+' - cardUser: '+cardUser+' - expMonth: '+expMonth+' - expYear:'+expYear+' - cvv: '+cvv);
-
 			var errors = [];
 			var validation = true;
 
