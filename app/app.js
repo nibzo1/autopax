@@ -36,7 +36,6 @@ angular
 
 		localStorageService.remove('ConfigOptions');
 		localStorageService.set('ConfigOptions', JSON.stringify($scope.configOpts));
-
 		// console.log($scope.configOpts);
 	};
 
