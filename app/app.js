@@ -17,7 +17,7 @@ angular
 	$scope.configOpts.tc = false;
 	$scope.configOpts.ap = false;
 
-    //initialise ui scope
+	//initialise ui scope
 	var lsJson = localStorageService.get('ConfigOptions');
 	if(lsJson){
 		$scope.configOpts.exp = lsJson.exp;
@@ -34,11 +34,8 @@ angular
 	//save credit card json to local storage
 	$scope.change = function() {
 
-		localStorageService.remove('CopfigOptions');
-		localStorageService.remove('CopfigOptions');
+		localStorageService.remove('ConfigOptions');
 		localStorageService.set('ConfigOptions', JSON.stringify($scope.configOpts));
-
-		// console.log($scope.configOpts);
 	};
 
 	//open config options from popup
@@ -47,18 +44,16 @@ angular
 			url: 'options.html'
 		});
 	};
-
-	// console.log($scope);
 })
 .controller('Cards', function ($scope, $http, ModelService, CardsListService, validationService, localStorageService, utilsService) {
 
 	//set scope variables
 	$scope.cardOptions = ModelService.cardOptions();
 	$scope.cards = CardsListService.getCards();
-    $scope.months = CardsListService.getMonths();
-    $scope.years = CardsListService.getYears();
+	$scope.months = CardsListService.getMonths();
+	$scope.years = CardsListService.getYears();
 
-    //initialise ui scope
+	//initialise ui scope
 	var lsJson = localStorageService.get('CardOptions');
 	if(lsJson){
 		var cardIdx = utilsService.idxSelect($scope.cards, lsJson.cardType, 'str', 'type');
@@ -100,7 +95,6 @@ angular
 			localStorageService.set('CardOptions', $scope.cardOptions);
 			validationService.setStatus('Options Saved.', 'card');
 		}
-		//console.log($scope.cardOptions);
 	};
 
 	//clear customer json from local storage
@@ -114,7 +108,6 @@ angular
 		$scope.cvv = '';
 		localStorageService.remove('CardOptions');
 	};
-	//console.log($scope);
 })
 .controller('Customer', function ($scope, $http, ModelService, CustomerListService, validationService, localStorageService, utilsService) {
 
@@ -193,18 +186,17 @@ angular
 		$scope.nationality = $scope.countries[0];
 		localStorageService.remove('CustomerOptions');
 	};
-	// console.log($scope);
 })
 .factory('utilsService', function () {
-    return {
-    	/*
+	return {
+		/*
 			list: The data to loop on
 			test: The value to look for
 			type: Data type to check for
 			param: Data object parameter e.g. obj.id
-    	*/
-    	idxSelect: function (list, test, type, param) {
-    		var idx = 0;
+		*/
+		idxSelect: function (list, test, type, param) {
+			var idx = 0;
 			angular.forEach(list, function(value, key) {
 				if(type === 'num' && value === Number(test) || type === 'str' && value === String(test)){
 					idx = key;
@@ -217,25 +209,23 @@ angular
 				}
 			});
 			return idx;
-    	},
-    	isChecked: function (list, type, id) {
-    		var checked = false;
+		},
+		isChecked: function (list, type, id) {
+			var checked = false;
 			angular.forEach(list, function(value, key) {
 				if(value.type === type && value.id === id && value.enabled === 'true'){
 					checked = 'true';
 				}
 			});
 			return checked;
-    	}
-    }
+		}
+	}
 })
 .factory('validationService', function () {
-    return {
-        validateCustomer: function (firstName, surname, email, phone, groupName, contactAddress1, contactCity, billPostcode, numberPlate, newsletter, profileType, nationalityIDX, countryIDX) {
-        	console.log('in validation service: firstName: '+firstName+' - surname: '+surname+' - email: '+email+' - groupName: '+groupName+' - contactAddress1:'+contactAddress1
-        				 + ' - billPostcode: '+billPostcode+' - numberPlate: '+numberPlate+' - profileType: '+profileType+' - nationalityIDX: '+nationalityIDX +' - countryIDX: '+countryIDX);
+	return {
+		validateCustomer: function (firstName, surname, email, phone, groupName, contactAddress1, contactCity, billPostcode, numberPlate, newsletter, profileType, nationalityIDX, countryIDX) {
 			var validation = true;
-        	var errors = [];
+			var errors = [];
 
 			if(typeof firstName === 'undefined' || firstName === ''){
 				errors.push('First name cannot be empty');
@@ -292,8 +282,6 @@ angular
 			return validation;
 		},
 		validateCard: function (cardType, cardNumber, cardUser, expMonth, expYear, cvv) {
-			//console.log('in validation service: cardType: '+cardType+' - cardNumber: '+cardNumber+' - cardUser: '+cardUser+' - expMonth: '+expMonth+' - expYear:'+expYear+' - cvv: '+cvv);
-
 			var errors = [];
 			var validation = true;
 
@@ -325,16 +313,16 @@ angular
 				this.addErrors(errors, 'card')
 			}
 			return validation;
-        },
-        setStatus: function (txt, type) {
+		},
+		setStatus: function (txt, type) {
 			var lbl = $('#status-'+type);
 			lbl.html(txt);
 			setTimeout(function() {
 				lbl.html('');
 			}, 750);
-        },
-        addErrors: function (err, type) {
-        	var ul = $('#error-'+type);
+		},
+		addErrors: function (err, type) {
+			var ul = $('#error-'+type);
 			angular.forEach(err, function(i) {
 				ul.html(ul.html() + '<li>'+i+'</li>');
 			});
@@ -342,13 +330,13 @@ angular
 			setTimeout(function() {
 			   ul.html('');
 			}, 5000);
-        }
-    }
+		}
+	}
 })
 .factory('ModelService', function () {
 		return {
-	 		cardOptions: function() {
-		 		var cardOptions = {
+			cardOptions: function() {
+				var cardOptions = {
 					'cardType' : '',
 					'cardNumber' : '',
 					'cardUser' : '',
@@ -359,7 +347,7 @@ angular
 				return cardOptions;
 			},
 			customer: function() {
-		 		var customer = {
+				var customer = {
 					'firstName' : '',
 					'surname' : '',
 					'email' : '',
@@ -377,7 +365,7 @@ angular
 				return customer;
 			},
 			config: function() {
-		 		var config = [
+				var config = [
 					{type: 'customer', id: 'ibe', enabled: 'false', text: 'IBE'},
 					{type: 'customer', id: 'grp', enabled: 'false', text: 'Group'},
 					{type: 'customer', id: 'nf', enabled: 'false', text: 'Name Firming'},
@@ -387,7 +375,7 @@ angular
 					{type: 'misc', id: 'np', enabled: 'false', text: 'Number Plate'},
 					{type: 'misc', id: 'tc', enabled: 'false', text: 'Terms & Conditions'},
 					{type: 'misc', id: 'ap', enabled: 'false', text: 'All Pax'}
-		        ];
+				];
 
 				return config;
 			}
@@ -402,10 +390,10 @@ angular
 				{name: 'Master Card', type: 'MCA', number: '5454545454545454'},
 				{name: 'Diners Club', type: 'DC', number: '5555555555554444'},
 				{name: 'American Express', type: 'AX', number: '343434343434343'}
-	        ];
-	        return cards;
-    	},
-    	getMonths: function(){
+			];
+			return cards;
+		},
+		getMonths: function(){
 			var months = [
 				'01',
 				'02',
@@ -420,8 +408,8 @@ angular
 				'11',
 				'12'
 			];
-	        return months;
-    	},
+			return months;
+		},
 		getYears: function(){
 			var years = [
 				'2013',
@@ -438,20 +426,20 @@ angular
 				'2024',
 				'2025'
 			];
-	        return years;
-    	}
-    };
+			return years;
+		}
+	};
 })
 .factory('CustomerListService', function () {
 	return {
-    	getCustomerTypes: function(){
+		getCustomerTypes: function(){
 			var customerTypes = [
 				{id: 'profileOnly', text: 'Profile Only'},
 				{id: 'colorClub', text: 'Color Club'}
 			];
-	        return customerTypes;
-    	},
-    	getCountries: function(){
+			return customerTypes;
+		},
+		getCountries: function(){
 			var countries = [
 				{id : '*', country: 'Select country...'},
 				{id : 'DK', country: 'Denmark'},
@@ -701,7 +689,7 @@ angular
 				{id : 'ZM', country: 'Zambia'},
 				{id : 'ZW', country: 'Zimbabwe'}
 			];
-	        return countries;
-    	}
-    };
+			return countries;
+		}
+	};
 });
