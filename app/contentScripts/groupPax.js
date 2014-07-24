@@ -22,7 +22,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 	}
 });
 
-function doPax(customer){
+function runScript(customer){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
