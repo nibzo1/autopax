@@ -7,10 +7,10 @@ chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", valu
 
 //handle script being enabled/disabled from context menu checkbox
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	if(request.data == true){
+	if(request.data === true){
 		runScript(customer);
 	}
-	else if(request.data == false){
+	else if(request.data === false){
 		//wipe out json
 		var myJSON = customer;
 		for (var key in myJSON) {
@@ -18,7 +18,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 				myJSON[key] = '';
 			}
 		}
-		runScript(customer);
+		runScript(myJSON);
 	}
 });
 
@@ -42,6 +42,9 @@ function runScript(customer){
 		ele.value = customer.phone;
 	});
 	$('#contact-address1').each(function (idx, ele) {
+		ele.value = customer.contactAddress1;
+	});
+	$('#contact-address2').each(function (idx, ele) {
 		ele.value = customer.contactAddress1;
 	});
 	$('#contact-city').each(function (idx, ele) {
