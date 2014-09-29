@@ -32,7 +32,8 @@ function runScript(customer){
 	$('[name="Profile/Customer/Telephone$1$/@AreaCityCode"]').val(087);
 	$('[name="Profile/Customer/Telephone$1$/@PhoneNumber"]').val(123456);
 	$('[name="Profile/Customer/Telephone$1$/@CountryAccessCode"]').prop('selectedIndex', 2);
-	$('[name$="Gender"]').prop('selectedIndex', 1);
+	$('[id="genderF"]').attr('checked','checked');
+	$('[id="genderF"]').val('checked');
 	$('[id$="BirthDate_day"]').prop('selectedIndex', 18);
 	$('[id$="BirthDate_month"]').prop('selectedIndex', 12);
 	$('[id$="BirthDate_year"]').prop('selectedIndex', 40);
@@ -43,6 +44,16 @@ function runScript(customer){
 	$('[name="Profile/Customer/Address/CityName"]').val(customer.contactCity);
 	$('[name="Profile/Customer/Address/PostalCode"]').val(customer.billPostcode);
 	$('[name="Profile/Customer/Email"]').val(customer.email);
+
+
+	//trigger change to update the UI
+	triggerChange('id', 'BirthDate_day', 'change');
+	triggerChange('id', 'BirthDate_month', 'change');
+	triggerChange('id', 'BirthDate_year', 'change');
+	triggerChange('xpath', 'select[name="Profile/Customer/Telephone$1$/@CountryAccessCode"]', 'change');
+	triggerChange('xpath', 'select[name="Profile/Customer/Address/CountryName/@Code"]', 'change');
+	triggerChange('xpath', 'select[name="Profile/Customer/@Nationality"]', 'change');
+
 
 	if(customer.newsletter){
 		$('#emailCheckbox').prop('checked', true);
@@ -60,7 +71,7 @@ function runScript(customer){
 		ele.selectedIndex = customer.country;
 	});
 
-	$('#MemberLevelSelection').each(function (idx, ele) {
+	$('#mobile_free_membership').each(function (idx, ele) {
 		if($(this).val() === customer.profileType){
 			$(this).prop("checked", true);
 			$(this).prop("checked", 'checked')
@@ -71,9 +82,30 @@ function runScript(customer){
 }
 
 //inject function to trigger a change event on countryList to enable defaulting of merchant country ect..
-var s = document.createElement('script');
+/*var s = document.createElement('script');
 s.textContent = "ns(document).ready(function() {merchantCountryHandler(ns('#checkout.contactDetails.countryList')); })";
 s.onload = function() {
     this.parentNode.removeChild(this);
 };
-document.head.appendChild(s);
+document.head.appendChild(s);*/
+
+//trigger changes on selectboxes using javascript, jquery has a freak out
+function triggerChange(queryType, query, event, val){
+
+	if(queryType === 'class'){
+		query = '.' + query;
+	}
+	else if(queryType === 'id'){
+		query = '#' + query;
+	}
+	else if(queryType === 'xpath'){
+		query = query;
+	}
+
+	var elements = document.querySelector(query);
+	var evt = document.createEvent("HTMLEvents");
+	if(elements){
+		evt.initEvent(event, true, true);
+		elements.dispatchEvent(evt);
+	}
+}
