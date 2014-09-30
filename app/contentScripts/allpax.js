@@ -1,4 +1,4 @@
-chrome.extension.sendRequest({method: "getConfig", key: "allpaxenabled"}, function(response) {
+chrome.extension.sendRequest({method: "getConfig", key: "ls.ConfigOptions", value: "ap"}, function(response) {
 	if(response && response.data === true){
 		runScript(true);
 	}
@@ -15,24 +15,23 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 });
 
 function runScript(status){
-/*	console.log("int he places statrus = "+status);
-
 	if(status){
-		console.log("made it in status");
 		$(document).ready(function(){
 			$('#continue-btn').on('click', function(){
-				console.log("in click handler");
-			allPax();
-				$('.allPax').each(function (){
-					console.log("in .each");
 
-
-					$(this).click();
-					$(this).trigger("click");
-				});
-
-				$('.allPax').each(function(){$(this).click()});
+				//get the links and click each
+				var elements = document.querySelectorAll('.allPax');
+				if(elements){
+					var evt = null;
+					$(elements).each(function(i, e){
+						var evt = document.createEvent("HTMLEvents");
+						if(evt){
+							evt.initEvent('click', true, true);
+							e.dispatchEvent(evt);
+						}
+					});
+				}
 			});
 		});
-	}*/
+	}
 }
