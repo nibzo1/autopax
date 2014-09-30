@@ -34,6 +34,7 @@ function runScript(customer){
 	$('[name="Profile/Customer/Telephone$1$/@CountryAccessCode"]').prop('selectedIndex', 2);
 	$('[id="genderF"]').attr('checked','checked');
 	$('[id="genderF"]').val('checked');
+	$('[name$="Gender"]').prop('selectedIndex', 1);
 	$('[id$="BirthDate_day"]').prop('selectedIndex', 18);
 	$('[id$="BirthDate_month"]').prop('selectedIndex', 12);
 	$('[id$="BirthDate_year"]').prop('selectedIndex', 40);
@@ -47,6 +48,7 @@ function runScript(customer){
 
 
 	//trigger change to update the UI
+	triggerChange('xpath', 'select[name="Profile/TPA_Extensions/Gender"]', 'change');
 	triggerChange('id', 'BirthDate_day', 'change');
 	triggerChange('id', 'BirthDate_month', 'change');
 	triggerChange('id', 'BirthDate_year', 'change');
