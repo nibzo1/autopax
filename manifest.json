@@ -19,7 +19,7 @@
 		"*://*/*/*/servicing/expressBookingDetails.do",
 		"*://*/*/*/*/addExtras.do",
 		"*://*/*/*/addExtras.do",
-		"*://*/*/*/createProfile.do",
+		"*://*/*/*/createProfile.do*",
 		"*://*/jsp/shopper/*"
 	],
 	"icons": { "128": "images/icon.png" },
@@ -94,7 +94,7 @@
 			]
 		},
 		{
-			"matches": ["*://*/*/*/createProfile.do"],
+			"matches": ["*://*/*/*/createProfile.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"app/variables.js",
