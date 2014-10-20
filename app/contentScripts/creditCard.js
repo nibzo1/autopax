@@ -46,6 +46,15 @@ function runScript(card){
 		});
 	}
 
+	if($('input[name="agreeAndReserve"]').length){
+		$('input[name="agreeAndReserve"]').prop("checked", "checked");
+		$('input[name="agreeAndReserve"]').attr("checked", "checked");
+	}
+	else{
+		$('input[name="agreeAndReserve", type="checkbox"]').removeAttr('checked');
+		$('input[name="agreeAndReserve", type="checkbox"]').val("false");
+	}
+
 	//profile payment screen
 	if($('.radio-container').length){
 		$('.radio-container').children().children("input").each(function(){
