@@ -39,13 +39,13 @@ function runScript(customer){
 	});
 	$('input[id$=-GivenName]').each(function (idx, ele) {
 		ele.focus();
-		// if($(ele).val() === ''){
+		if($(ele).val() === ''){
 			if(customer.firstName===''){
 				ele.value = customer.firstName;
 			}else{
 				ele.value = customer.firstName + suffix(idx);
 			}
-		// }
+		}
 		ele.blur()
 	});
 	$('input[id$=-Surname]').each(function (idx, ele) {
