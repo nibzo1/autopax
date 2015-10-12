@@ -58,3 +58,6 @@ body{
 .card-type{
 	width: 3em !important;
 }
+.dob-spacing{
+	float: left;
+}

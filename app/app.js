@@ -73,6 +73,7 @@ angular
 		$scope.expYear = $scope.years[yearIdx + 1];
 	}
 
+
 	//save credit card json to local storage
 	$scope.submit = function() {
 		var cardType = $scope.selectedCard.type;
@@ -115,6 +116,9 @@ angular
 	$scope.customer = ModelService.customer();
 	$scope.countries = CustomerListService.getCountries();
 	$scope.customerTypes = CustomerListService.getCustomerTypes();
+	$scope.dobDays = CustomerListService.getDays();
+	$scope.dobMonths = CustomerListService.getMonths();
+	$scope.dobYears = CustomerListService.getYears();
 
 	//initialise ui scope
 	var lsJson = localStorageService.get('CustomerOptions');
@@ -141,12 +145,76 @@ angular
 		$scope.profileType = $scope.customerTypes[paxTypeIDX];
 		$scope.nationality = $scope.countries[nationalityIDX];
 		$scope.country = $scope.countries[countryIDX];
+
+
+
+		// $scope.customer.dobtype = lsJson.dobtype;
+		$scope.customer.dobtype = 'random';
+		$scope.customer.gender = 'male';
 	}else{
 		//default lists to the first item
 		$scope.profileType = $scope.customerTypes[0];
 		$scope.country = $scope.countries[0];
 		$scope.nationality = $scope.countries[0];
+
+
+		$scope.customer.dobtype = 'random';
+		$scope.customer.gender = 'male';
+
+
+		console.log($scope.customer.dobtype )
+		console.log($scope.dobDays )
+
+		$scope.customer.dobDay = "--";
+		$scope.customer.dobMonth = $scope.dobMonths[0];
+		$scope.customer.dobYear = $scope.dobYears[0];
 	}
+
+
+
+	$scope.randomiseDob = function() {
+
+		// var yearIdx = utilsService.idxSelect($scope.years, new Date().getFullYear(), 'str', null);
+		// console.log($scope.customer.dobYear.length)
+
+
+		// var date = chance.birthday({string: true, american: false}).split("/");
+
+		var date = utilsService.checkRandomYear();
+
+
+		console.log('after the func ='+date)
+
+		$scope.customer.dobDay = String(utilsService.padZeros(date[0]));
+		$scope.customer.dobMonth = String(utilsService.padZeros(date[1]));
+		$scope.customer.dobYear = String(date[2]);
+
+
+		// options = $("#sel > option")
+		// $scope.customer.dobDay[Math.floor(Math.random() * $scope.dobMonths.length.length)].selected = true
+
+		/*console.log(chance.birthday({string: true, american: false}))
+		console.log(Math.floor(Math.random() * $scope.dobMonths.length))*/
+
+		// $scope.customer.dobDay = utilsService.padZeros(utilsService.randomValue($scope.dobMonths));
+
+		// console.log('random val = '+utilsService.padZeros(utilsService.randomValue($scope.dobMonths)))
+		/*console.log($scope.customer.dobYear)
+		console.log($scope.customer.dobMonth)*/
+	}
+
+
+
+	$scope.handleDOBOpts = function(dobType) {
+		if (typeof dobType !== 'undefined' && dobType === 'random') {
+			$scope.customer.dobtype = dobType;
+		} else if (typeof dobType !== 'undefined' && dobType === 'value') {
+			$scope.customer.dobtype = dobType;
+		}
+	}
+
+
+
 
 	//save customer json to local storage
 	$scope.submit = function() {
@@ -218,6 +286,39 @@ angular
 				}
 			});
 			return checked;
+		},
+		checkRandomYear: function () {
+			var date = chance.birthday({string: true, american: false}).split("/");
+
+
+			console.log('\n\ndate from the chance = '+date )
+
+			var dobDay = String(date[0]);
+			var dobMonth = String(date[1]);
+			var dobYear = Number(date[2]);
+
+			//this year
+			var year = new Date().getFullYear();
+
+
+
+			var yearDiff = (Number(year) - Number(dobYear));
+
+			console.log('current year = '+String(year) )
+			console.log('dobYear year = '+String(dobYear) )
+			console.log('year sum = '+yearDiff);
+
+			if(Number(year) - Number(dobYear) >= 18){
+				console.log('return date' )
+				return date;
+			}
+			else{
+				console.log('go again' )
+				return this.checkRandomYear();
+			}
+		},
+		padZeros: function(n) {
+		    return (n < 10) ? ("0" + n) : n;
 		}
 	}
 })
@@ -432,6 +533,168 @@ angular
 })
 .factory('CustomerListService', function () {
 	return {
+		getDays: function(){
+			var days = [
+				'--',
+				'01',
+				'02',
+				'03',
+				'04',
+				'05',
+				'06',
+				'07',
+				'08',
+				'09',
+				'10',
+				'11',
+				'12',
+				'13',
+				'14',
+				'15',
+				'16',
+				'17',
+				'18',
+				'19',
+				'20',
+				'21',
+				'22',
+				'23',
+				'24',
+				'25',
+				'26',
+				'27',
+				'28',
+				'29',
+				'30',
+				'31'
+			];
+			return days;
+		},
+		getMonths: function(){
+			/*var months = [
+				{id: '00', text: '--'},
+				{id: '01', text: 'January'},
+				{id: '02', text: 'February'},
+				{id: '03', text: 'March'},
+				{id: '04', text: 'April'},
+				{id: '05', text: 'May'},
+				{id: '06', text: 'June'},
+				{id: '07', text: 'July'},
+				{id: '08', text: 'August'},
+				{id: '09', text: 'September'},
+				{id: '10', text: 'October'},
+				{id: '11', text: 'November'},
+				{id: '12', text: 'December'}
+			];*/
+			var months = [
+				'--',
+				'01',
+				'02',
+				'03',
+				'04',
+				'05',
+				'06',
+				'07',
+				'08',
+				'09',
+				'10',
+				'11',
+				'12'
+			];
+			return months;
+		},
+		getYears: function(){
+			var years = [
+				'--',
+				'2000',
+				'1999',
+				'1998',
+				'1997',
+				'1996',
+				'1995',
+				'1994',
+				'1993',
+				'1992',
+				'1991',
+				'1990',
+				'1989',
+				'1988',
+				'1987',
+				'1986',
+				'1985',
+				'1984',
+				'1983',
+				'1982',
+				'1981',
+				'1980',
+				'1979',
+				'1978',
+				'1977',
+				'1976',
+				'1975',
+				'1974',
+				'1973',
+				'1972',
+				'1971',
+				'1970',
+				'1969',
+				'1968',
+				'1967',
+				'1966',
+				'1965',
+				'1964',
+				'1963',
+				'1962',
+				'1961',
+				'1960',
+				'1959',
+				'1958',
+				'1957',
+				'1956',
+				'1955',
+				'1954',
+				'1953',
+				'1952',
+				'1951',
+				'1950',
+				'1949',
+				'1948',
+				'1947',
+				'1946',
+				'1945',
+				'1944',
+				'1943',
+				'1942',
+				'1941',
+				'1940',
+				'1939',
+				'1938',
+				'1937',
+				'1936',
+				'1935',
+				'1934',
+				'1933',
+				'1932',
+				'1931',
+				'1930',
+				'1929',
+				'1928',
+				'1927',
+				'1926',
+				'1925',
+				'1924',
+				'1923',
+				'1922',
+				'1921',
+				'1920',
+				'1919',
+				'1918',
+				'1917',
+				'1916',
+				'1915'
+			];
+			return years;
+		},
 		getCustomerTypes: function(){
 			var customerTypes = [
 				{id: 'profileOnly', text: 'Profile Only'},

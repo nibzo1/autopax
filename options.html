@@ -97,6 +97,55 @@
 					</div>
 					<br></br>
 					<div>
+						<div class="label-position">Gender</div>
+						<div class="input-position">
+							<label>
+								<input type="radio" id="gender" value="male" ng-model="customer.gender"/>
+								&nbsp;Male
+							</label>
+							<label>
+								<input type="radio" id="gender" value="female" ng-model="customer.gender"/>
+								&nbsp;Female
+							</label>
+						</div>
+					</div>
+					<br></br>
+					<div>
+						<div class="label-position">DOB</div>
+						<div class="input-position">
+							<label>
+								<input type="radio" id="dob" value="random" ng-model="customer.dobtype" ng-click="handleDOBOpts('random')"/>
+								&nbsp;<b>Random DOB:</b> DOB will be randomised for each screen
+							</label>
+							<br/>
+							<label>
+								<input type="radio" id="dob" value="value" ng-model="customer.dobtype" ng-click="handleDOBOpts('value')"/>
+								&nbsp;<b>Select DOB:</b> Entered DOB will be used for each screen
+							</label>
+						</div>
+						<br></br>
+						<br></br>
+						<div class="label-position">&nbsp;</div>
+						<div id="randob">
+							<div class="dob-spacing" style="padding-right: 2em; margin-bottom: 1em">
+								<label>
+									<button id="randomise" type="button" ng-click="randomiseDob()" ng-disabled="customer.dobtype=='random'">Generate</button>
+								</label>
+							</div>
+							<div class="dob-spacing">
+								<select id="dobDay" size="1" ng-model="customer.dobDay" ng-options="day for day in dobDays" ng-disabled="customer.dobtype=='random'"></select>
+							</div>
+							<div class="dob-spacing">
+								<select id="dobMonth" size="1" ng-model="customer.dobMonth" ng-options="month for month in dobMonths" ng-disabled="customer.dobtype=='random'"></select>
+							</div>
+							<div class="dob-spacing">
+								<select id="dobYear" size="1" ng-model="customer.dobYear" ng-options="year for year in dobYears" ng-disabled="customer.dobtype=='random'"></select>
+							</div>
+						</div>
+						<br></br>
+					</div>
+					<br></br>
+					<div>
 						<div class="label-position">Profile Type</div>
 						<div class="input-position">
 							<select id="profileType" size="1" ng-model="profileType" ng-options="customerType.text for customerType in customerTypes"></select>
@@ -267,6 +316,7 @@
 		<script src="libs/backbone.js" type="text/javascript"></script>
 		<script src="libs/backbone-localstorage.js" type="text/javascript"></script>
 		<script src="libs/angular-local-storage.min.js" type="text/javascript"></script>
+		<script src="libs/chance.min.js" type="text/javascript"></script>
 		<script src="app/ui.js" type="text/javascript"></script>
 		<script src="app/tasks.js" type="text/javascript"></script>
 		<script src="app/app.js" type="text/javascript"></script>
