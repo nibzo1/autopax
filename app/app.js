@@ -147,10 +147,25 @@ angular
 		$scope.country = $scope.countries[countryIDX];
 
 
+		//set the DOB fields
+		if(typeof lsJson.dobType === 'value'){
+			$scope.customer.dobtype = 'value';
+			$scope.customer.dobDay = lsJson.dobDay;
+			$scope.customer.dobMonth = lsJson.dobMonth;
+			$scope.customer.dobYear =  lsJson.dobYear;
+		}
+		else{
+			$scope.customer.dobtype = 'random';
+		}
 
-		// $scope.customer.dobtype = lsJson.dobtype;
-		$scope.customer.dobtype = 'random';
-		$scope.customer.gender = 'male';
+		//default the gender
+		if(typeof lsJson.gender === 'male'){
+			$scope.customer.gender = 'male';
+		}
+		else{
+			$scope.customer.gender = 'female';
+		}
+
 	}else{
 		//default lists to the first item
 		$scope.profileType = $scope.customerTypes[0];
@@ -173,10 +188,6 @@ angular
 
 
 	$scope.randomiseDob = function() {
-
-		// var yearIdx = utilsService.idxSelect($scope.years, new Date().getFullYear(), 'str', null);
-		// console.log($scope.customer.dobYear.length)
-
 
 		// var date = chance.birthday({string: true, american: false}).split("/");
 
@@ -461,7 +472,12 @@ angular
 					'newsletter' : '',
 					'profileType' : '',
 					'nationality' : '',
-					'country' : ''
+					'country' : '',
+					'gender' : '',
+					'dobType' : '',
+					'dobDay' : '',
+					'dobMonth' : '',
+					'dobYear' : ''
 				};
 				return customer;
 			},
