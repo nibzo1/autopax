@@ -22,7 +22,9 @@
 		"*://*/*/*/createProfile.do*",
 		"*://*/jsp/shopper/*"
 	],
-	"icons": { "128": "images/icon.png" },
+	"icons": {
+		"128": "images/icon.png"
+	},
 	"options_page": "options.html",
 	"background": {
 		"scripts": [
@@ -32,73 +34,92 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["*://*/*/*/passengerDetails.do*"],
+			"matches": [
+				"*://*/*/*/passengerDetails.do*"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/ibePax.js"
+				"contentScripts/variables.js",
+				"contentScripts/ibePax.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/*/addExtras.do", "*://*/*/*/addExtras.do"],
+			"matches": [
+				"*://*/*/*/*/addExtras.do",
+				"*://*/*/*/addExtras.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/contentScripts/allpax.js"
+				"contentScripts/allpax.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/groupNameFirming.do"],
+			"matches": [
+				"*://*/*/*/servicing/groupNameFirming.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/nameFirmingPax.js"
+				"contentScripts/variables.js",
+				"contentScripts/nameFirmingPax.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/groupOwnerDetails.do"],
+			"matches": [
+				"*://*/*/*/servicing/groupOwnerDetails.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/groupPax.js"
+				"contentScripts/variables.js",
+				"contentScripts/groupPax.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/ferryAllocation.do", "*://*/*/*/nameAllocation.do"],
+			"matches": [
+				"*://*/*/*/servicing/ferryAllocation.do",
+				"*://*/*/*/nameAllocation.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/numberPlate.js"
+				"contentScripts/variables.js",
+				"contentScripts/numberPlate.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/shoppingCart.do"],
+			"matches": [
+				"*://*/*/*/shoppingCart.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/contentScripts/termsAndConditions.js"
+				"contentScripts/termsAndConditions.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/expressBookingDetails.do"],
+			"matches": [
+				"*://*/*/*/servicing/expressBookingDetails.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/expressPax.js"
+				"contentScripts/variables.js",
+				"contentScripts/expressPax.js"
 			]
 		},
 		{
-			"matches": ["*://*/jsp/shopper/*", "*://*/*/*/paymentDetails.do*"],
+			"matches": [
+				"*://*/jsp/shopper/*",
+				"*://*/*/*/paymentDetails.do*"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/creditCard.js"
+				"contentScripts/variables.js",
+				"contentScripts/creditCard.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/createProfile.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/profile.js"
+				"contentScripts/variables.js",
+				"contentScripts/profile.js"
 			]
 		}
 	]
