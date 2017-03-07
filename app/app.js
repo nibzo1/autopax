@@ -329,7 +329,7 @@ angular
 			}
 		},
 		padZeros: function(n) {
-		    return (n < 10) ? ("0" + n) : n;
+			return (n < 10) ? ("0" + n) : n;
 		}
 	}
 })
@@ -761,10 +761,10 @@ angular
 				{id : 'BN', country: 'Brunei Darussalam'},
 				{id : 'BG', country: 'Bulgaria'},
 				{id : 'BF', country: 'Burkina Faso'},
-				{id : 'BU', country: 'Burma	'},
+				{id : 'BU', country: 'Burma '},
 				{id : 'BI', country: 'Burundi'},
 				{id : 'KH', country: 'Cambodia'},
-				{id : 'CM', country: 'Cameroon	'},
+				{id : 'CM', country: 'Cameroon  '},
 				{id : 'CA', country: 'Canada'},
 				{id : 'CV', country: 'Cape Verde'},
 				{id : 'KY', country: 'Cayman Islands'},
@@ -792,7 +792,7 @@ angular
 				{id : 'EG', country: 'Egypt'},
 				{id : 'SV', country: 'El Salvador'},
 				{id : 'GQ', country: 'Equatorial Guinea'},
-				{id : 'ER', country: 'Eritrea	'},
+				{id : 'ER', country: 'Eritrea   '},
 				{id : 'EE', country: 'Estonia'},
 				{id : 'ET', country: 'Ethiopia'},
 				{id : 'FO', country: 'Faeroe Islands'},

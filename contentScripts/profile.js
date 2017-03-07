@@ -82,4 +82,3 @@ function runScript(customer){
 		}
 	});
 }
-

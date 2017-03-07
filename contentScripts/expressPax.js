@@ -27,16 +27,7 @@ function runScript(customer){
 
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
-	};
-	$('select[id$=-Gender]').each(function (idx, ele) {
-		if($(ele).val() === ''){
-			if(customer.firstName===''){
-				ele.selectedIndex = 0;
-			}else{
-				ele.selectedIndex = 1;
-			}
-		}
-	});
+	};	
 	$('input[id$=-GivenName]').each(function (idx, ele) {
 		ele.focus();
 		if($(ele).val() === ''){
@@ -59,7 +50,6 @@ function runScript(customer){
 		}
 		ele.blur()
 	});
-
 	$('[name$=DateofBirth]').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
@@ -72,8 +62,6 @@ function runScript(customer){
 			}
 		}
 	});
-
-
 	$('input[name$=Gender]').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
