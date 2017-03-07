@@ -37,12 +37,10 @@ function runScript(customer){
 				if ($(ele).val() === 'M' && customer.gender === 'male') {
 					$(ele).prop('checked', true);
 					$(ele).attr('checked','checked');
-					$(ele).val('checked');
 				}
 				else if ($(ele).val() === 'F' && customer.gender === 'female') {
 					$(ele).prop('checked', true);
 					$(ele).attr('checked','checked');
-					$(ele).val('checked');
 				}
 			}
 		}
