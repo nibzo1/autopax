@@ -27,6 +27,7 @@ function runScript(card){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
+
 	if($('[name="securityCode"]').length || $('[name="cardNumber"]').length || $('[name="cardholderName"]').length || $('[name="expiryMonth"]').length || $('[name="expiryYear"]').length){
 		$('[name="cardNumber"]').click().focus().val(card.cardNumber).blur();
 		$('[name="cardholderName"]').click().focus().val(card.cardUser).blur();
@@ -34,6 +35,7 @@ function runScript(card){
 		$('[name="expiryDate.expiryYear"]').click().focus().val(card.expYear).blur();
 		$('[name="securityCode"]').click().focus().val(card.cvv).blur();
 	}
+  
 	if($('[name="paymentTypes"]').length){
 		$('[name="paymentTypes"]').children("option").each(function(){
 			$(this).removeAttr("selected");
@@ -68,6 +70,4 @@ function runScript(card){
 			}
 		});
 	}
-
-
 }

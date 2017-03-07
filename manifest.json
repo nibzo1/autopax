@@ -23,7 +23,9 @@
 		"*://*/*/*/createProfileLink.do*",
 		"*://*/app/hpp/payment/multicard/*"
 	],
-	"icons": { "128": "images/icon.png" },
+	"icons": {
+		"128": "images/icon.png"
+	},
 	"options_page": "options.html",
 	"background": {
 		"scripts": [
@@ -33,7 +35,9 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["*://*/*/*/passengerDetails.do*"],
+			"matches": [
+				"*://*/*/*/passengerDetails.do*"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/variables.js",
@@ -48,7 +52,9 @@
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/groupNameFirming.do"],
+			"matches": [
+				"*://*/*/*/servicing/groupNameFirming.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/variables.js",
@@ -56,7 +62,9 @@
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/groupOwnerDetails.do"],
+			"matches": [
+				"*://*/*/*/servicing/groupOwnerDetails.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/variables.js",
@@ -64,7 +72,10 @@
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/ferryAllocation.do", "*://*/*/*/nameAllocation.do"],
+			"matches": [
+				"*://*/*/*/servicing/ferryAllocation.do",
+				"*://*/*/*/nameAllocation.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/variables.js",
@@ -72,14 +83,18 @@
 			]
 		},
 		{
-			"matches": ["*://*/*/*/shoppingCart.do"],
+			"matches": [
+				"*://*/*/*/shoppingCart.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/termsAndConditions.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/servicing/expressBookingDetails.do"],
+			"matches": [
+				"*://*/*/*/servicing/expressBookingDetails.do"
+			],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/variables.js",

@@ -91,8 +91,7 @@ function runScript(customer){
 		ele.blur();
 	});
 
-
-	$('[name$=Surname]').each(function (idx, ele) {
+  $('[name$=Surname]').each(function (idx, ele) {
 		ele.focus();
 		if(!$(ele).is(':disabled') ){
 			if(customer.surname===''){
@@ -132,7 +131,6 @@ function runScript(customer){
 
 	});
 
-
 	$('#email1, #email2').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.email===''){
@@ -143,7 +141,6 @@ function runScript(customer){
 			}
 		}
 	});
-
 
 	$('#phone1').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
@@ -156,7 +153,6 @@ function runScript(customer){
 		}
 	});
 
-
 	$('#contact-address1').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.contactAddress1===''){
@@ -168,7 +164,6 @@ function runScript(customer){
 		}
 	});
 
-
 	$('#contact-city').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.contactCity===''){
@@ -179,7 +174,6 @@ function runScript(customer){
 			}
 		}
 	});
-
 
 	$('#bill-postcode').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
