@@ -1,4 +1,4 @@
- {
+{
 	"name": "AutoPax",
 	"description": "This extension Populates details in a project, to save time. Added todo list. Author: Andrew Howell",
 	"version": "2.0.0",
@@ -20,7 +20,8 @@
 		"*://*/*/*/*/addExtras.do",
 		"*://*/*/*/addExtras.do",
 		"*://*/*/*/createProfile.do*",
-		"*://*/jsp/shopper/*"
+		"*://*/*/*/createProfileLink.do*",
+		"*://*/app/hpp/payment/multicard/*"
 	],
 	"icons": { "128": "images/icon.png" },
 	"options_page": "options.html",
@@ -35,70 +36,70 @@
 			"matches": ["*://*/*/*/passengerDetails.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/ibePax.js"
+				"contentScripts/variables.js",
+				"contentScripts/ibePax.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/*/addExtras.do", "*://*/*/*/addExtras.do"],
+			"matches": ["*://*/*/*/*/addExtras.do", "*://*/*/*/manageExtras.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/contentScripts/allpax.js"
+				"contentScripts/allpax.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/servicing/groupNameFirming.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/nameFirmingPax.js"
+				"contentScripts/variables.js",
+				"contentScripts/nameFirmingPax.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/servicing/groupOwnerDetails.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/groupPax.js"
+				"contentScripts/variables.js",
+				"contentScripts/groupPax.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/servicing/ferryAllocation.do", "*://*/*/*/nameAllocation.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/numberPlate.js"
+				"contentScripts/variables.js",
+				"contentScripts/numberPlate.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/shoppingCart.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/contentScripts/termsAndConditions.js"
+				"contentScripts/termsAndConditions.js"
 			]
 		},
 		{
 			"matches": ["*://*/*/*/servicing/expressBookingDetails.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/expressPax.js"
+				"contentScripts/variables.js",
+				"contentScripts/expressPax.js"
 			]
 		},
 		{
-			"matches": ["*://*/jsp/shopper/*", "*://*/*/*/paymentDetails.do*"],
+			"matches": ["*://*/app/hpp/payment/multicard/*", "*://*/*/*/paymentDetails.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/creditCard.js"
+				"contentScripts/variables.js",
+				"contentScripts/creditCard.js"
 			]
 		},
 		{
-			"matches": ["*://*/*/*/createProfile.do*"],
+			"matches": ["*://*/*/*/createProfile.do*", "*://*/*/*/createProfileLink.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
-				"app/variables.js",
-				"app/contentScripts/profile.js"
+				"contentScripts/variables.js",
+				"contentScripts/profile.js"
 			]
 		}
 	]

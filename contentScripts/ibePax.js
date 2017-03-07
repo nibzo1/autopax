@@ -27,27 +27,58 @@ function runScript(customer){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
-	$('select.gender').each(function (idx, ele) {
+
+	$('input[name$=Gender]').each(function (idx, ele) {
+		if(!$(ele).is(':disabled') ){
+			if(customer.firstName===''){
+
+			}
+			else{
+				if ($(ele).val() === 'M' && customer.gender === 'male') {
+					$(ele).prop('checked', true);
+					$(ele).attr('checked','checked');
+					$(ele).val('checked');
+				}
+				else if ($(ele).val() === 'F' && customer.gender === 'female') {
+					$(ele).prop('checked', true);
+					$(ele).attr('checked','checked');
+					$(ele).val('checked');
+				}
+			}
+		}
+		ele.blur();
+	});
+
+
+	$('select[name$=Gender]').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
 				ele.selectedIndex = 1;
+				triggerChange('xpath', 'select[name="'+$(ele).attr('name')+'"]', 'change');
 			}
 		}
+		ele.blur();
 	});
-	$('select.titlelarge').each(function (idx, ele) {
+
+
+	$('select[name$=NamePrefix]').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
 				ele.selectedIndex = 1;
+				triggerChange('xpath', 'select[name="'+$(ele).attr('name')+'"]', 'change');
 			}
 		}
+		ele.blur();
 	});
-	$('input.xsmall.name').each(function (idx, ele) {
+
+
+	$('[name$=GivenName]').each(function (idx, ele) {
 		ele.focus();
 		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
@@ -59,7 +90,9 @@ function runScript(customer){
 		}
 		ele.blur();
 	});
-	$('input.small.name').each(function (idx, ele) {
+
+
+	$('[name$=Surname]').each(function (idx, ele) {
 		ele.focus();
 		if(!$(ele).is(':disabled') ){
 			if(customer.surname===''){
@@ -71,26 +104,35 @@ function runScript(customer){
 		}
 		ele.blur();
 	});
-	$('select.age').each(function (idx, ele) {
+
+
+	$('[name$=BirthDate]').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
-				ele.selectedIndex = 0;
+				ele.val('');
 			}
 			else{
-				ele.selectedIndex = 2
+				$(ele).val('01-01-' + getPaxYear($(ele).attr("paxtype")));
 			}
 		}
 	});
-	$('select.medium').each(function (idx, ele) {
+
+
+	$('[name$=Nationality]').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
 				ele.selectedIndex = 0;
 			}
 			else{
 				ele.value = customer.country;
+				triggerChange('xpath', 'select[name="'+$(ele).attr('name')+'"]', 'change');
 			}
+
 		}
+
 	});
+
+
 	$('#email1, #email2').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.email===''){
@@ -101,6 +143,8 @@ function runScript(customer){
 			}
 		}
 	});
+
+
 	$('#phone1').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.phone===''){
@@ -111,6 +155,8 @@ function runScript(customer){
 			}
 		}
 	});
+
+
 	$('#contact-address1').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.contactAddress1===''){
@@ -121,6 +167,8 @@ function runScript(customer){
 			}
 		}
 	});
+
+
 	$('#contact-city').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.contactCity===''){
@@ -131,6 +179,8 @@ function runScript(customer){
 			}
 		}
 	});
+
+
 	$('#bill-postcode').each(function (idx, ele) {
 		if(!$(ele).is(':disabled') ){
 			if(customer.billPostcode===''){

@@ -27,12 +27,14 @@ function runScript(card){
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
 	};
-	if($('[name="CVC"]').length || $('[name="cardNumber"]').length || $('[name="cardHolderName"]').length || $('[name="expiryMonth"]').length || $('[name="expiryYear"]').length){
-		$('[name="cardNumber"]').val(card.cardNumber);
-		$('[name="cardHolderName"]').val(card.cardUser);
-		$('[name="expiryMonth"]').val(card.expMonth);
-		$('[name="expiryYear"]').val(card.expYear);
-		$('[name="CVC"]').val(card.cvv);
+	if($('[name="securityCode"]').length || $('[name="cardNumber"]').length || $('[name="cardholderName"]').length || $('[name="expiryMonth"]').length || $('[name="expiryYear"]').length){
+		$('[name="cardNumber"]').click().focus().val(card.cardNumber).blur();
+		$('[name="cardholderName"]').click().focus().val(card.cardUser).blur();
+		$('[name="cardholderName"]').click().focus().val(card.cardUser).click();
+		$('[name="cardholderName"]').click().focus().val(card.cardUser).blur();
+		$('[name="expiryDate.expiryMonth"]').click().focus().val(card.expMonth).blur();
+		$('[name="expiryDate.expiryYear"]').click().focus().val(card.expYear).blur();
+		$('[name="securityCode"]').click().focus().val(card.cvv).blur();
 	}
 	if($('[name="paymentTypes"]').length){
 		$('[name="paymentTypes"]').children("option").each(function(){
@@ -68,4 +70,6 @@ function runScript(card){
 			}
 		});
 	}
+
+
 }
