@@ -27,16 +27,7 @@ function runScript(customer){
 
 	var suffix = function (idx) {
 		return String.fromCharCode(idx + 65);
-	};
-	$('select[id$=-Gender]').each(function (idx, ele) {
-		if($(ele).val() === ''){
-			if(customer.firstName===''){
-				ele.selectedIndex = 0;
-			}else{
-				ele.selectedIndex = 1;
-			}
-		}
-	});
+	};	
 	$('input[id$=-GivenName]').each(function (idx, ele) {
 		ele.focus();
 		if($(ele).val() === ''){
@@ -59,12 +50,34 @@ function runScript(customer){
 		}
 		ele.blur()
 	});
-	$('select[id$=-Age]').each(function (idx, ele) {
-		if($(ele).val() === ''){
+	$('[name$=DateofBirth]').each(function (idx, ele) {
+		if(!$(ele).is(':disabled') ){
 			if(customer.firstName===''){
-				ele.selectedIndex = 0;
-			}else{
-				ele.selectedIndex = 2;
+				ele.val('');
+			}
+			else{
+				$(ele).click().focus();
+				$(ele).val('01-01-' + getPaxYear($(ele).attr("passengertype")));
+				$(ele).blur();
+			}
+		}
+	});
+	$('input[name$=Gender]').each(function (idx, ele) {
+		if(!$(ele).is(':disabled') ){
+			if(customer.firstName===''){
+
+			}
+			else{
+				if ($(ele).val() === 'M' && customer.gender === 'male') {
+					$(ele).prop('checked', true);
+					$(ele).attr('checked','checked');
+					$(ele).val('checked');
+				}
+				else if ($(ele).val() === 'F' && customer.gender === 'female') {
+					$(ele).prop('checked', true);
+					$(ele).attr('checked','checked');
+					$(ele).val('checked');
+				}
 			}
 		}
 	});
@@ -72,6 +85,7 @@ function runScript(customer){
 		if($(ele).val() === ''){
 			ele.value = customer.email;
 		}
+		ele.blur();
 	});
 	$('#Passenger1-PhoneNumber').each(function (idx, ele) {
 		if($(ele).val() === ''){

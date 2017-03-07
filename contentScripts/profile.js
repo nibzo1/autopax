@@ -82,32 +82,3 @@ function runScript(customer){
 		}
 	});
 }
-
-//inject function to trigger a change event on countryList to enable defaulting of merchant country ect..
-/*var s = document.createElement('script');
-s.textContent = "ns(document).ready(function() {merchantCountryHandler(ns('#checkout.contactDetails.countryList')); })";
-s.onload = function() {
-    this.parentNode.removeChild(this);
-};
-document.head.appendChild(s);*/
-
-//trigger changes on selectboxes using javascript, jquery has a freak out
-function triggerChange(queryType, query, event, val){
-
-	if(queryType === 'class'){
-		query = '.' + query;
-	}
-	else if(queryType === 'id'){
-		query = '#' + query;
-	}
-	else if(queryType === 'xpath'){
-		query = query;
-	}
-
-	var elements = document.querySelector(query);
-	var evt = document.createEvent("HTMLEvents");
-	if(elements){
-		evt.initEvent(event, true, true);
-		elements.dispatchEvent(evt);
-	}
-}

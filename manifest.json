@@ -1,4 +1,4 @@
- {
+{
 	"name": "AutoPax",
 	"description": "This extension Populates details in a project, to save time. Added todo list. Author: Andrew Howell",
 	"version": "2.0.0",
@@ -20,7 +20,8 @@
 		"*://*/*/*/*/addExtras.do",
 		"*://*/*/*/addExtras.do",
 		"*://*/*/*/createProfile.do*",
-		"*://*/jsp/shopper/*"
+		"*://*/*/*/createProfileLink.do*",
+		"*://*/app/hpp/payment/multicard/*"
 	],
 	"icons": {
 		"128": "images/icon.png"
@@ -44,10 +45,7 @@
 			]
 		},
 		{
-			"matches": [
-				"*://*/*/*/*/addExtras.do",
-				"*://*/*/*/addExtras.do"
-			],
+			"matches": ["*://*/*/*/*/addExtras.do", "*://*/*/*/manageExtras.do"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/allpax.js"
@@ -104,10 +102,7 @@
 			]
 		},
 		{
-			"matches": [
-				"*://*/jsp/shopper/*",
-				"*://*/*/*/paymentDetails.do*"
-			],
+			"matches": ["*://*/app/hpp/payment/multicard/*", "*://*/*/*/paymentDetails.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/variables.js",
@@ -115,7 +110,7 @@
 			]
 		},
 		{
-			"matches": ["*://*/*/*/createProfile.do*"],
+			"matches": ["*://*/*/*/createProfile.do*", "*://*/*/*/createProfileLink.do*"],
 			"js": [
 				"libs/jquery.min.2.0.3.js",
 				"contentScripts/variables.js",
