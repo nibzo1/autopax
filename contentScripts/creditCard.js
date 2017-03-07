@@ -30,8 +30,6 @@ function runScript(card){
 	if($('[name="securityCode"]').length || $('[name="cardNumber"]').length || $('[name="cardholderName"]').length || $('[name="expiryMonth"]').length || $('[name="expiryYear"]').length){
 		$('[name="cardNumber"]').click().focus().val(card.cardNumber).blur();
 		$('[name="cardholderName"]').click().focus().val(card.cardUser).blur();
-		$('[name="cardholderName"]').click().focus().val(card.cardUser).click();
-		$('[name="cardholderName"]').click().focus().val(card.cardUser).blur();
 		$('[name="expiryDate.expiryMonth"]').click().focus().val(card.expMonth).blur();
 		$('[name="expiryDate.expiryYear"]').click().focus().val(card.expYear).blur();
 		$('[name="securityCode"]').click().focus().val(card.cvv).blur();
